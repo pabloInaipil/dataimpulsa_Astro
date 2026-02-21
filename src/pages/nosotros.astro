@@ -1,0 +1,42 @@
+---
+// src/pages/nosotros.astro
+import Layout from "@layouts/Layout.astro";
+import Navbar from "@components/layout/Navbar.astro";
+import Footer from "@components/layout/Footer.astro";
+import Team from "@components/sections/Team.astro";
+import Contact from "@components/sections/Contact.astro";
+---
+
+<Layout
+  title="Nosotros"
+  description="Conoce al equipo de DatAImpulsa. Profesionales en Data Analytics, Power BI y automatización que transforman datos en decisiones."
+>
+  <Navbar activeLink="nosotros" />
+  <main>
+    <!-- Page Hero -->
+    <section class="relative z-[1] pt-32 pb-16 px-6 overflow-hidden">
+      <div
+        class="absolute -top-[150px] -right-[150px] w-[500px] h-[500px] pointer-events-none"
+        style="background: radial-gradient(circle, var(--color-violet-glow-strong) 0%, transparent 70%); animation: pulse-glow 8s ease-in-out infinite;"
+      ></div>
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+          // Nosotros
+        </div>
+        <h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold leading-tight tracking-tight mb-6">
+          Conoce al equipo de<br />
+          <span class="gradient-text">DatAImpulsa</span>
+        </h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-2xl mx-auto leading-relaxed">
+          Somos un equipo multidisciplinario apasionado por los datos, la automatización
+          y la tecnología. Cada proyecto que tomamos se convierte en una misión por
+          entregar valor real y medible.
+        </p>
+      </div>
+    </section>
+
+    <Team />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

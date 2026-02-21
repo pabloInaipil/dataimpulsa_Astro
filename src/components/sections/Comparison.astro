@@ -1,0 +1,71 @@
+---
+// src/components/sections/Comparison.astro
+const negativeItems = [
+  "Datos inconsistentes con duplicados y errores",
+  "Actualización manual que retrasa decisiones",
+  "Gráficos limitados y poco intuitivos",
+  "Consolidación lenta y propensa a errores",
+  "Sin acceso móvil ni colaboración en tiempo real",
+];
+
+const positiveItems = [
+  "Fuentes conectadas en tiempo real sin duplicados",
+  "KPIs actualizados automáticamente 24/7",
+  "Visualizaciones interactivas y exploración libre",
+  "Consolidación automática, cero intervención",
+  "Acceso desde cualquier dispositivo, compartible",
+];
+---
+
+<section id="por-que" class="relative z-[1] py-24 px-6 bg-[--color-surface]">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+        // ¿Por qué cambiar?
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
+        Excel vs. Power BI
+      </h2>
+      <p class="text-lg text-[--color-text-secondary] max-w-xl mx-auto leading-relaxed">
+        El salto de productividad que tu equipo necesita.
+      </p>
+    </div>
+
+    <!-- Comparison Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-start reveal">
+      <!-- Negative Column -->
+      <div class="bg-[--color-card] border rounded-2xl p-8" style="border-color: rgba(239, 68, 68, 0.2);">
+        <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 text-red-300">
+          ✕ Planillas Excel
+        </h3>
+        {negativeItems.map((item) => (
+          <div class="flex items-start gap-3 py-3 border-b border-[--color-border-subtle] last:border-b-0 text-sm text-[--color-text-secondary]">
+            <span class="text-red-500 text-base mt-0.5 shrink-0">✕</span>
+            {item}
+          </div>
+        ))}
+      </div>
+
+      <!-- VS Badge (desktop only) -->
+      <div class="hidden lg:flex flex-col items-center justify-center pt-12">
+        <div class="w-12 h-12 rounded-full bg-[--color-card] border-2 border-[--color-border-accent] flex items-center justify-center font-extrabold text-sm text-[--color-purple-400]">
+          VS
+        </div>
+      </div>
+
+      <!-- Positive Column -->
+      <div class="bg-[--color-card] border rounded-2xl p-8" style="border-color: rgba(34, 197, 94, 0.2); box-shadow: 0 0 40px rgba(34, 197, 94, 0.05);">
+        <h3 class="text-xl font-semibold mb-6 flex items-center gap-2 text-green-300">
+          ✓ Power BI + Automatización
+        </h3>
+        {positiveItems.map((item) => (
+          <div class="flex items-start gap-3 py-3 border-b border-[--color-border-subtle] last:border-b-0 text-sm text-[--color-text-secondary]">
+            <span class="text-green-500 text-base mt-0.5 shrink-0">✓</span>
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

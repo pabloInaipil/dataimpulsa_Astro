@@ -1,0 +1,40 @@
+---
+// src/components/sections/Areas.astro
+const areas = [
+  { icon: "👥", name: "R.R.H.H." },
+  { icon: "💰", name: "Finanzas" },
+  { icon: "🏛️", name: "Gobierno" },
+  { icon: "🏗️", name: "Operaciones" },
+];
+---
+
+<section class="relative z-[1] py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+        // Experiencia
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight">
+        Áreas operacionales que dominamos
+      </h2>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-3xl mx-auto">
+      {areas.map((area, i) => (
+        <div
+          class:list={[
+            "bg-[--color-card] border border-[--color-border-subtle] rounded-2xl py-8 px-6 text-center transition-all duration-300",
+            "hover:border-[--color-border-accent] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.2)]",
+            "reveal",
+            `reveal-delay-${i + 1}`,
+          ]}
+        >
+          <div class="text-3xl mb-4">{area.icon}</div>
+          <h4 class="text-sm font-semibold">{area.name}</h4>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+// src/components/layout/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="relative z-[1] border-t border-[--color-border-subtle] py-12 px-6 bg-[--color-deep]">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Logo & Copy -->
+      <div class="flex flex-col items-center md:items-start gap-2">
+      <a href="/" class="flex items-center gap-2 no-underline">
+          <img src="/images/logo/dark.png" alt="DatAImpulsa" class="h-24 w-auto block light:hidden" />
+          <img src="/images/logo/light.png" alt="DatAImpulsa" class="h-24 w-auto hidden light:block" />
+      </a>
+        <p class="text-xs text-[--color-text-muted]">
+          © {currentYear} DatAImpulsa SpA — Todos los derechos reservados
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex gap-6">
+        <a href="/" class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors">Inicio</a>
+        <a href="/nosotros" class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors">Nosotros</a>
+        <a href="/portafolio" class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors">Portafolio</a>
+        <a href="/blog" class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors">Blog</a>
+      </nav>
+
+      <!-- Social -->
+      <div class="flex gap-4">
+        <a
+          href="https://www.linkedin.com/company/dataimpulsa"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+          aria-label="LinkedIn"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+          aria-label="X (Twitter)"
+        >
+          X
+        </a>
+        <a
+          href="mailto:contacto@dataimpulsa.cl"
+          class="text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+        >
+          Email
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

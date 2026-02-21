@@ -1,0 +1,120 @@
+---
+// src/components/sections/Team.astro
+interface TeamMember {
+  name: string;
+  role: string;
+  skills: string;
+  photo?: string;
+  linkedin: string;
+  twitter?: string;
+}
+
+const team: TeamMember[] = [
+  {
+    name: "Luis Bernales",
+    role: "Ingeniero Analista BI",
+    skills: "Control de Gestión · Análisis de Datos · Desarrollo Web",
+    linkedin: "https://www.linkedin.com/in/luisbernalesanalista/",
+    photo: "/images/team/Gerard.jpeg"
+  },
+  {
+    name: "Pablo Inaipil",
+    role: "Ingeniero Analista BI",
+    skills: "Data Analytics · Power BI · SQL · Python · Tableau",
+    linkedin: "https://www.linkedin.com/in/pablo-inaipil/",
+    photo: "/images/team/pablo2024.jpg"
+  },
+  {
+    name: "Corina Rivera",
+    role: "Ejecutiva Gestión Clientes",
+    skills: "UX-UI Design · Analista de RRHH",
+    linkedin: "https://www.linkedin.com/in/corinarivera/",
+    photo: "/images/team/cori.png"
+  },
+  {
+    name: "Juan Osses",
+    role: "Python Developer",
+    skills: "FullStack Dev · Python · Java · WordPress",
+    linkedin: "#",
+    photo: "/images/team/john.jpg"
+  },
+];
+---
+
+<section id="equipo" class="relative z-[1] py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16 reveal">
+      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+        // Equipo
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
+        Las personas detrás de los datos
+      </h2>
+      <p class="text-lg text-[--color-text-secondary] max-w-xl leading-relaxed">
+        Profesionales especializados en transformar complejidad en claridad.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {team.map((member, i) => (
+        <div
+          class:list={[
+            "bg-[--color-card] border border-[--color-border-subtle] rounded-2xl overflow-hidden transition-all duration-400",
+            "hover:border-[--color-border-accent] hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
+            "reveal",
+            `reveal-delay-${i + 1}`,
+          ]}
+        >
+          <!-- Photo placeholder -->
+          <div
+            class="w-full aspect-square flex items-center justify-center text-5xl text-[--color-text-muted] relative overflow-hidden"
+            style="background: linear-gradient(135deg, #1a1a3e, #2a1a4e);"
+          >
+            {member.photo ? (
+              <img src={member.photo} alt={member.name} class="w-full h-full object-cover" />
+            ) : (
+              <span>👤</span>
+            )}
+            <!-- Bottom gradient overlay -->
+            <div class="absolute bottom-0 left-0 right-0 h-1/2" style="background: linear-gradient(to top, var(--color-card), transparent);"></div>
+          </div>
+
+          <!-- Info -->
+          <div class="p-5">
+            <h4 class="text-base font-semibold mb-1">{member.name}</h4>
+            <div class="text-xs text-[--color-purple-400] mb-2" style="font-family: var(--font-mono);">
+              {member.role}
+            </div>
+            <div class="text-xs text-[--color-text-muted] leading-relaxed mb-3">
+              {member.skills}
+            </div>
+            <div class="flex gap-3">
+              {member.twitter && (
+                <a
+                  href={member.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-xs text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+                  aria-label={`${member.name} en X`}
+                >
+                  𝕏
+                </a>
+              )}
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+                aria-label={`${member.name} en LinkedIn`}
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

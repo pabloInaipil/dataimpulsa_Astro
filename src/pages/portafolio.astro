@@ -1,0 +1,100 @@
+---
+// src/pages/portafolio.astro
+import Layout from "@layouts/Layout.astro";
+import Navbar from "@components/layout/Navbar.astro";
+import Footer from "@components/layout/Footer.astro";
+import Contact from "@components/sections/Contact.astro";
+
+const projects = [
+  {
+    title: "Dashboard Empresa TecnoMax",
+    category: "Tecnología",
+    description: "Panel de control financiero y operativo con integración de múltiples fuentes de datos, KPIs en tiempo real y reportes automatizados.",
+    tags: ["Power BI", "SQL", "RPA"],
+  },
+  {
+    title: "Dashboard TodoCasa Construcciones",
+    category: "Construcción",
+    description: "Sistema de seguimiento de proyectos, control de costos y ejecución presupuestaria con dashboards interactivos para gerencia.",
+    tags: ["Power BI", "Excel", "Python"],
+  },
+];
+---
+
+<Layout
+  title="Portafolio"
+  description="Explora los dashboards personalizados y automatizados que DatAImpulsa ha implementado en diversas industrias."
+>
+  <Navbar activeLink="portafolio" />
+  <main>
+    <!-- Page Hero -->
+    <section class="relative z-[1] pt-32 pb-16 px-6 overflow-hidden">
+      <div
+        class="absolute -top-[150px] -left-[150px] w-[500px] h-[500px] pointer-events-none"
+        style="background: radial-gradient(circle, var(--color-violet-glow-strong) 0%, transparent 70%); animation: pulse-glow 8s ease-in-out infinite;"
+      ></div>
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+          // Portafolio
+        </div>
+        <h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold leading-tight tracking-tight mb-6">
+          Nuestro <span class="gradient-text">trabajo</span>
+        </h1>
+        <p class="text-lg text-[--color-text-secondary] max-w-2xl mx-auto leading-relaxed">
+          Descubre los dashboards personalizados y automatizados que hemos creado para diversas
+          industrias. Integramos tus sistemas para centralizar y visualizar toda tu información.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="relative z-[1] pb-24 px-6">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        {projects.map((project, i) => (
+          <div
+            class:list={[
+              "group bg-[--color-card] border border-[--color-border-subtle] rounded-2xl overflow-hidden transition-all duration-400",
+              "hover:border-[--color-border-accent] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-violet-glow)]",
+              "reveal",
+              `reveal-delay-${i + 1}`,
+            ]}
+          >
+            <!-- Project Image Placeholder -->
+            <div
+              class="w-full aspect-video flex items-center justify-center text-6xl text-[--color-text-muted] relative"
+              style="background: linear-gradient(135deg, #0f0f2e, #1a1a4e);"
+            >
+              📊
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full text-xs font-medium text-[--color-purple-400] border border-[--color-border-accent]" style="background: rgba(168, 85, 247, 0.15);">
+                  {project.category}
+                </span>
+              </div>
+            </div>
+
+            <!-- Project Info -->
+            <div class="p-8">
+              <h3 class="text-xl font-bold mb-3">{project.title}</h3>
+              <p class="text-sm text-[--color-text-secondary] leading-relaxed mb-4">
+                {project.description}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    class="px-3 py-1 rounded-md text-xs font-medium text-[--color-text-muted] border border-[--color-border-subtle]"
+                    style="background: var(--color-surface);"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,22 @@
+---
+// src/components/sections/StatsBar.astro
+const stats = [
+  { number: "50+", label: "Dashboards entregados" },
+  { number: "30+", label: "Clientes activos" },
+  { number: "99%", label: "Satisfacción" },
+  { number: "24/7", label: "Datos en tiempo real" },
+];
+---
+
+<div class="relative z-[1] border-t border-b border-[--color-border-subtle] py-12 px-6 bg-[--color-surface]/50">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+    {stats.map((stat, i) => (
+      <div class:list={["text-center reveal", `reveal-delay-${i + 1}`]}>
+        <div class="text-4xl font-extrabold gradient-text" style="font-family: var(--font-mono);">
+          {stat.number}
+        </div>
+        <div class="text-sm text-[--color-text-muted] mt-1">{stat.label}</div>
+      </div>
+    ))}
+  </div>
+</div>

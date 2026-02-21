@@ -1,0 +1,84 @@
+---
+// src/components/sections/Services.astro
+const services = [
+  {
+    icon: "📊",
+    title: "Dashboards Power BI",
+    description:
+      "Paneles interactivos y automatizados que consolidan tus fuentes de datos en visualizaciones accionables, accesibles desde cualquier dispositivo.",
+  },
+  {
+    icon: "⚙️",
+    title: "Automatización RPA",
+    description:
+      "Eliminamos la carpintería de datos manual. Robots que ejecutan, consolidan y validan tus reportes financieros automáticamente.",
+  },
+  {
+    icon: "🔍",
+    title: "Inteligencia de Licitaciones",
+    description:
+      "Monitoreo estratégico de Mercado Público para detectar oportunidades de negocio antes que tu competencia.",
+  },
+  {
+    icon: "📁",
+    title: "Gestión Documental",
+    description:
+      "Flujos inteligentes que validan, ordenan y auditan rendiciones y respaldos de forma automática.",
+  },
+  {
+    icon: "🔗",
+    title: "Integración de Datos",
+    description:
+      "Conectamos tus sistemas dispersos (ERP, CRM, hojas de cálculo) en una fuente única de verdad.",
+  },
+  {
+    icon: "🌐",
+    title: "Desarrollo Web",
+    description:
+      "Sitios de alto rendimiento con Astro, landing pages de conversión y presencia digital profesional para tu marca.",
+  },
+];
+---
+
+<section id="servicios" class="relative z-[1] py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-16 reveal">
+      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+        // Servicios
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
+        Lo que hacemos por tu empresa
+      </h2>
+      <p class="text-lg text-[--color-text-secondary] max-w-xl leading-relaxed">
+        Soluciones integrales de datos que se adaptan a las necesidades reales de tu operación.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((service, i) => (
+        <div
+          class:list={[
+            "group bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-8 transition-all duration-400 relative overflow-hidden",
+            "hover:border-[--color-border-accent] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-violet-glow)]",
+            "reveal",
+            `reveal-delay-${(i % 3) + 1}`,
+          ]}
+        >
+          <!-- Top glow on hover -->
+          <div class="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-400" style="background: linear-gradient(90deg, transparent, var(--color-purple-500), transparent);"></div>
+
+          <div
+            class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-[--color-border-accent]"
+            style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.1));"
+          >
+            {service.icon}
+          </div>
+          <h3 class="text-lg font-semibold mb-3">{service.title}</h3>
+          <p class="text-sm text-[--color-text-secondary] leading-relaxed">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
