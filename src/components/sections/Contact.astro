@@ -59,19 +59,16 @@
         </div>
       </div>
 
-      <!-- Form Column (Netlify Forms) -->
+      <!-- Form Column (Web3Forms) -->
       <form
-        name="contacto"
+        action="https://api.web3forms.com/submit"
         method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
         class="bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-8"
       >
-        <!-- Honeypot (anti-spam) -->
-        <input type="hidden" name="form-name" value="contacto" />
-        <p class="hidden">
-          <label>No llenar: <input name="bot-field" /></label>
-        </p>
+        <input type="hidden" name="access_key" value="a483aa31-f840-401c-bb54-e7ce5a0c209f" />
+        <input type="hidden" name="subject" value="Nuevo contacto desde dataimpulsa.cl" />
+        <input type="hidden" name="from_name" value="DatAImpulsa Web" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" />  
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
