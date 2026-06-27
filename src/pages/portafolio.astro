@@ -9,12 +9,14 @@ const projects = [
   {
     title: "Dashboard Empresa TecnoMax",
     category: "Tecnología",
+    gif: "/1.gif",
     description: "Panel de control financiero y operativo con integración de múltiples fuentes de datos, KPIs en tiempo real y reportes automatizados.",
     tags: ["Power BI", "SQL", "RPA"],
   },
   {
     title: "Dashboard TodoCasa Construcciones",
     category: "Construcción",
+    gif: "/2.gif",
     description: "Sistema de seguimiento de proyectos, control de costos y ejecución presupuestaria con dashboards interactivos para gerencia.",
     tags: ["Power BI", "Excel", "Python"],
   },
@@ -64,14 +66,10 @@ const projects = [
               class="w-full aspect-video flex items-center justify-center text-6xl text-[--color-text-muted] relative"
               style="background: linear-gradient(135deg, #0f0f2e, #1a1a4e);"
             >
-              📊
+              <img src={project.gif}>
               <div class="absolute top-4 left-4">
-                <span class="px-3 py-1 rounded-full text-xs font-medium text-[--color-purple-400] border border-[--color-border-accent]" style="background: rgba(168, 85, 247, 0.15);">
-                  {project.category}
-                </span>
               </div>
             </div>
-
             <!-- Project Info -->
             <div class="p-8">
               <h3 class="text-xl font-bold mb-3">{project.title}</h3>
