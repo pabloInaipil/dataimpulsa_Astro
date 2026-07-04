@@ -30,7 +30,7 @@ export const siteConfig = {
   nav: [
     { href: "/#servicios", label: "Servicios", id: "servicios" },
     { href: "/#tecnologia", label: "Tecnologías", id: "tecnologia" },
-    { href: "/portafolio", label: "Casos de Éxito", id: "portafolio" },
+    { href: "/portafolio", label: "Portafolio", id: "portafolio" },
     { href: "/nosotros", label: "Nosotros", id: "nosotros" },
     { href: "/blog", label: "Recursos", id: "blog" },
   ] as NavLink[],
