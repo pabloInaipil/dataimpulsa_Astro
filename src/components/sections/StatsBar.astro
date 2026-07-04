@@ -1,22 +1,108 @@
 ---
 // src/components/sections/StatsBar.astro
-const stats = [
-  { number: "7+", label: "Años de experiencia" },
-  { number: "10", label: "Días promedio de entrega" },
-  { number: "100%", label: "Sitios en producción" },
-  { number: "24/7", label: "Datos en tiempo real" },
+// Panel de métricas tipo dashboard: PageSpeed, tiempo de carga y Core Web Vitals.
+const vitals = [
+  { name: "LCP", value: "0.6s" },
+  { name: "INP", value: "48ms" },
+  { name: "CLS", value: "0.01" },
 ];
+
+const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"];
 ---
 
-<div class="relative z-[1] border-t border-b border-[--color-border-subtle] py-12 px-6 bg-[--color-surface]/50">
-  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-    {stats.map((stat, i) => (
-      <div class:list={["text-center reveal", `reveal-delay-${i + 1}`]}>
-        <div class="text-4xl font-extrabold gradient-text" style="font-family: var(--font-mono);">
-          {stat.number}
-        </div>
-        <div class="text-sm text-[--color-text-muted] mt-1">{stat.label}</div>
+<section class="relative z-[1] py-10 px-6">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Card 1: Rendimiento promedio -->
+    <div class="bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-7 reveal reveal-delay-1">
+      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-[--color-text-muted] mb-5">
+        Rendimiento promedio
       </div>
-    ))}
+      <div class="flex items-center justify-between gap-4">
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-5xl font-extrabold font-mono">98</span>
+            <span class="text-xl font-semibold text-[--color-text-muted] font-mono">/100</span>
+          </div>
+          <div class="text-sm text-[--color-text-muted] mt-2">Google PageSpeed</div>
+        </div>
+        <div class="score-ring w-20 h-20 rounded-full grid place-items-center shrink-0">
+          <div class="w-[60px] h-[60px] rounded-full bg-[--color-card] grid place-items-center text-2xl">⚡</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Tiempo de carga -->
+    <div class="bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-7 reveal reveal-delay-2">
+      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-[--color-text-muted] mb-5">
+        Tiempo de carga
+      </div>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-4xl font-extrabold font-mono">0.6s</span>
+        <span class="text-[0.65rem] font-mono font-semibold px-2.5 py-1 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
+          ULTRA RÁPIDO
+        </span>
+      </div>
+      <svg viewBox="0 0 280 80" class="w-full h-auto" aria-hidden="true">
+        <polygon
+          class="spark-area"
+          points="20,68 60,60 100,52 140,58 180,42 220,34 260,18 260,80 20,80"
+        ></polygon>
+        <polyline
+          class="spark-line"
+          points="20,68 60,60 100,52 140,58 180,42 220,34 260,18"
+        ></polyline>
+        {[68, 60, 52, 58, 42, 34, 18].map((y, i) => (
+          <circle class="spark-dot" cx={20 + i * 40} cy={y} r="3"></circle>
+        ))}
+      </svg>
+      <div class="flex justify-between text-[0.6rem] font-mono text-[--color-text-muted] mt-1 px-1">
+        {months.map((m) => <span>{m}</span>)}
+      </div>
+    </div>
+
+    <!-- Card 3: Core Web Vitals -->
+    <div class="bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-7 reveal reveal-delay-3">
+      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-[--color-text-muted] mb-5">
+        Core Web Vitals
+      </div>
+      <ul class="flex flex-col gap-4 list-none">
+        {vitals.map((v) => (
+          <li class="flex items-center justify-between gap-3">
+            <span class="text-sm font-mono font-semibold text-[--color-text-secondary]">{v.name}</span>
+            <span class="text-sm font-mono font-bold ml-auto">{v.value}</span>
+            <span class="text-[0.6rem] font-mono px-2 py-0.5 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
+              Excelente
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
   </div>
-</div>
+</section>
+
+<style>
+  .score-ring {
+    background-image: conic-gradient(
+      #22c55e calc(98 * 1%),
+      var(--color-card-hover) 0
+    );
+  }
+
+  .spark-line {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .spark-area {
+    fill: var(--color-accent-glow);
+  }
+
+  .spark-dot {
+    fill: var(--color-accent-light);
+  }
+</style>

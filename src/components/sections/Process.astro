@@ -1,0 +1,64 @@
+---
+// src/components/sections/Process.astro
+// Proceso de trabajo en 5 pasos, con línea conectora en desktop.
+const steps = [
+  {
+    title: "Descubrimiento",
+    description: "Entendemos tu negocio, objetivos y usuarios.",
+  },
+  {
+    title: "Diseño & UX",
+    description: "Diseñamos experiencias claras y centradas en conversión.",
+  },
+  {
+    title: "Desarrollo con Astro",
+    description: "Código limpio, componentes reutilizables y performance al máximo.",
+  },
+  {
+    title: "Pruebas & Optimización",
+    description: "Probamos, medimos y optimizamos cada detalle.",
+  },
+  {
+    title: "Lanzamiento",
+    description: "Desplegamos y aseguramos un rendimiento impecable.",
+  },
+];
+---
+
+<section class="relative z-[1] py-24 px-6 bg-[--color-surface]/50 border-t border-b border-[--color-border-subtle]">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
+        // Nuestro proceso
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight">
+        Rápido, claro y enfocado en resultados
+      </h2>
+    </div>
+
+    <!-- Steps -->
+    <div class="relative">
+      <div class="hidden lg:block absolute top-9 left-[10%] right-[10%] border-t border-dashed border-[--color-border-accent]"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        {steps.map((step, i) => (
+          <div
+            class:list={[
+              "bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-6 text-center relative",
+              "transition-all duration-400 hover:border-[--color-border-accent] hover:-translate-y-1",
+              "reveal",
+              `reveal-delay-${(i % 4) + 1}`,
+            ]}
+          >
+            <div class="w-10 h-10 rounded-full grid place-items-center mx-auto mb-4 bg-accent text-white text-sm font-bold font-mono shadow-[0_0_20px_var(--color-accent-glow-strong)]">
+              {i + 1}
+            </div>
+            <h3 class="text-base font-semibold mb-2">{step.title}</h3>
+            <p class="text-sm text-[--color-text-secondary] leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

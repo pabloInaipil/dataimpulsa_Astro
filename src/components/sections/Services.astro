@@ -1,84 +1,49 @@
 ---
 // src/components/sections/Services.astro
-const services = [
+// Features de la línea principal: desarrollo web con Astro.
+const features = [
   {
-    icon: "🌐",
-    title: "Desarrollo Web",
-    description:
-      "Sitios de alto rendimiento con Astro, landing pages de conversión y presencia digital profesional para tu PYME.",
+    title: "Ultra rápido",
+    description: "Páginas que cargan al instante.",
+    icon: "M13 2 3 14h7l-1 8 10-12h-7l1-8z",
   },
   {
-    icon: "📊",
-    title: "Dashboards Power BI",
-    description:
-      "Paneles interactivos y automatizados que consolidan tus fuentes de datos en visualizaciones accionables, accesibles desde cualquier dispositivo.",
+    title: "SEO nativo",
+    description: "Mejor posicionamiento desde el código.",
+    icon: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.35-4.35",
   },
   {
-    icon: "⚙️",
-    title: "Automatización RPA",
-    description:
-      "Eliminamos la carpintería de datos manual. Robots que ejecutan, consolidan y validan tus reportes financieros automáticamente.",
+    title: "Arquitectura moderna",
+    description: "Jamstack, escalable y segura.",
+    icon: "M12 2 2 7l10 5 10-5-10-5ZM2 12l10 5 10-5M2 17l10 5 10-5",
   },
   {
-    icon: "🔍",
-    title: "Inteligencia de Licitaciones",
-    description:
-      "Monitoreo estratégico de Mercado Público para detectar oportunidades de negocio antes que tu competencia.",
+    title: "Experiencia increíble",
+    description: "Interfaces fluidas y sin distracciones.",
+    icon: "M12 3v2m6.4.6-1.5 1.5M21 12h-2M5.1 5.6l1.5 1.5M3 12h2m2.6 6.4 1.5-1.5m5.8 0 1.5 1.5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
   },
   {
-    icon: "📁",
-    title: "Gestión Documental",
-    description:
-      "Flujos inteligentes que validan, ordenan y auditan rendiciones y respaldos de forma automática.",
-  },
-  {
-    icon: "🔗",
-    title: "Integración de Datos",
-    description:
-      "Conectamos tus sistemas dispersos (ERP, CRM, hojas de cálculo) en una fuente única de verdad.",
+    title: "100% a medida",
+    description: "Diseñado para tu negocio.",
+    icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z",
   },
 ];
 ---
 
-<section id="servicios" class="relative z-[1] py-24 px-6">
-  <div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="mb-16 reveal">
-      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
-        // Servicios
-      </div>
-      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
-        Lo que hacemos por tu empresa
-      </h2>
-      <p class="text-lg text-[--color-text-secondary] max-w-xl leading-relaxed">
-        Soluciones integrales de datos que se adaptan a las necesidades reales de tu operación.
-      </p>
-    </div>
-
-    <!-- Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service, i) => (
-        <div
-          class:list={[
-            "group bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-8 transition-all duration-400 relative overflow-hidden",
-            "hover:border-[--color-border-accent] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-violet-glow)]",
-            "reveal",
-            `reveal-delay-${(i % 3) + 1}`,
-          ]}
-        >
-          <!-- Top glow on hover -->
-          <div class="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-400" style="background: linear-gradient(90deg, transparent, var(--color-purple-500), transparent);"></div>
-
-          <div
-            class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6 border border-[--color-border-accent]"
-            style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.1));"
-          >
-            {service.icon}
-          </div>
-          <h3 class="text-lg font-semibold mb-3">{service.title}</h3>
-          <p class="text-sm text-[--color-text-secondary] leading-relaxed">{service.description}</p>
+<section id="servicios" class="relative z-[1] py-16 px-6 border-t border-b border-[--color-border-subtle] bg-[--color-surface]/50">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+    {features.map((f, i) => (
+      <div class:list={["flex items-start gap-4 lg:flex-col lg:gap-0 reveal", `reveal-delay-${(i % 4) + 1}`]}>
+        <div class="w-12 h-12 rounded-full grid place-items-center shrink-0 border border-[--color-border-accent] bg-accent/10 text-accent lg:mb-4">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d={f.icon}></path>
+          </svg>
         </div>
-      ))}
-    </div>
+        <div>
+          <h3 class="text-base font-semibold mb-1">{f.title}</h3>
+          <p class="text-sm text-[--color-text-secondary] leading-relaxed">{f.description}</p>
+        </div>
+      </div>
+    ))}
   </div>
 </section>
