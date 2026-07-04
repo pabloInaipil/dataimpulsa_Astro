@@ -23,3 +23,6 @@ Thumbs.db
 
 # Netlify
 .netlify/
+
+# archivos de cliente que no van al repo
+src/components/layout/rocio-de-angel-astro-project.zip
