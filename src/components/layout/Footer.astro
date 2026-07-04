@@ -10,7 +10,7 @@ const footerNav = [
 ];
 ---
 
-<footer class="relative z-[1] border-t border-[--color-border-subtle] pt-16 pb-8 px-6 bg-[--color-deep]">
+<footer class="relative z-[1] border-t border-(--color-border-subtle) pt-16 pb-8 px-6 bg-(--color-deep)">
   <div class="max-w-7xl mx-auto">
 
     <!-- Columnas -->
@@ -22,7 +22,7 @@ const footerNav = [
           <img src="/logo-nuevo-dataimpulsa.png" alt="DatAImpulsa" class="h-12 w-auto block light:hidden" />
           <img src="/images/logo/light.png" alt="DatAImpulsa" class="h-12 w-auto hidden light:block" />
         </a>
-        <p class="text-sm text-[--color-text-secondary] leading-relaxed max-w-[300px]">
+        <p class="text-sm text-(--color-text-secondary) leading-relaxed max-w-[300px]">
           Sitios web hiper rápidos con Astro, más automatización IA y análisis
           de datos para impulsar tu negocio.
         </p>
@@ -34,7 +34,7 @@ const footerNav = [
         <ul class="flex flex-col gap-2.5 list-none">
           {siteConfig.services.web.items.map((item) => (
             <li>
-              <a href="/#servicios" class="text-sm text-[--color-text-muted] no-underline hover:text-accent-light transition-colors">
+              <a href="/#servicios" class="text-sm text-(--color-text-muted) no-underline hover:text-accent-light transition-colors">
                 {item.title}
               </a>
             </li>
@@ -48,7 +48,7 @@ const footerNav = [
         <ul class="flex flex-col gap-2.5 list-none">
           {siteConfig.services.data.items.map((item) => (
             <li>
-              <a href="/#datos" class="text-sm text-[--color-text-muted] no-underline hover:text-accent-light transition-colors">
+              <a href="/#datos" class="text-sm text-(--color-text-muted) no-underline hover:text-accent-light transition-colors">
                 {item.title}
               </a>
             </li>
@@ -61,18 +61,18 @@ const footerNav = [
         <h3 class="text-sm font-semibold mb-4">Contacto</h3>
         <ul class="flex flex-col gap-2.5 list-none">
           <li>
-            <a href={`mailto:${siteConfig.email}`} class="text-sm text-[--color-text-muted] no-underline hover:text-accent-light transition-colors">
+            <a href={`mailto:${siteConfig.email}`} class="text-sm text-(--color-text-muted) no-underline hover:text-accent-light transition-colors">
               {siteConfig.email}
             </a>
           </li>
-          <li class="text-sm text-[--color-text-muted]">{siteConfig.phone}</li>
-          <li class="text-sm text-[--color-text-muted]">{siteConfig.address}</li>
+          <li class="text-sm text-(--color-text-muted)">{siteConfig.phone}</li>
+          <li class="text-sm text-(--color-text-muted)">{siteConfig.address}</li>
           <li>
             <a
               href={siteConfig.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-sm text-[--color-text-muted] no-underline hover:text-accent-light transition-colors"
+              class="text-sm text-(--color-text-muted) no-underline hover:text-accent-light transition-colors"
               aria-label="LinkedIn"
             >
               LinkedIn →
@@ -83,13 +83,13 @@ const footerNav = [
     </div>
 
     <!-- Barra inferior -->
-    <div class="border-t border-[--color-border-subtle] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p class="text-xs text-[--color-text-muted]">
+    <div class="border-t border-(--color-border-subtle) pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-(--color-text-muted)">
         © {currentYear} DatAImpulsa SpA — Todos los derechos reservados
       </p>
       <nav class="flex flex-wrap justify-center gap-5">
         {footerNav.map((link) => (
-          <a href={link.href} class="text-xs text-[--color-text-muted] no-underline hover:text-accent-light transition-colors">
+          <a href={link.href} class="text-xs text-(--color-text-muted) no-underline hover:text-accent-light transition-colors">
             {link.label}
           </a>
         ))}

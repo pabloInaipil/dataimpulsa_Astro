@@ -43,7 +43,7 @@ const cardExtras = [
 const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
 ---
 
-<section id="datos" class="relative z-[1] py-24 px-6 bg-[--color-surface]/50 border-t border-b border-[--color-border-subtle] overflow-hidden">
+<section id="datos" class="relative z-[1] py-24 px-6 bg-(--color-surface)/50 border-t border-b border-(--color-border-subtle) overflow-hidden">
   <!-- Glow sutil que conecta con el resto del sitio -->
   <div class="data-glow absolute -top-[200px] -right-[250px] w-[600px] h-[600px] pointer-events-none"></div>
 
@@ -58,7 +58,7 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
           Más que sitios web: impulsamos tu negocio <span class="gradient-text">con datos e IA</span>
         </h2>
       </div>
-      <p class="text-lg text-[--color-text-secondary] leading-relaxed max-w-sm lg:text-right">
+      <p class="text-lg text-(--color-text-secondary) leading-relaxed max-w-sm lg:text-right">
         {data.description}
       </p>
     </div>
@@ -68,22 +68,22 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
       {cards.map((card, i) => (
         <div
           class:list={[
-            "group bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-7 flex flex-col",
-            "transition-all duration-400 hover:border-[--color-border-accent] hover:-translate-y-1",
+            "group bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-7 flex flex-col",
+            "transition-all duration-400 hover:border-(--color-border-accent) hover:-translate-y-1",
             "hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-accent-glow)]",
             "reveal",
             `reveal-delay-${i + 1}`,
           ]}
         >
-          <div class="w-12 h-12 rounded-xl grid place-items-center mb-6 border border-[--color-border-accent] bg-accent/10 text-accent">
+          <div class="w-12 h-12 rounded-xl grid place-items-center mb-6 border border-(--color-border-accent) bg-accent/10 text-accent">
             <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               {card.paths.map((d) => <path d={d}></path>)}
             </svg>
           </div>
           <h3 class="text-lg font-semibold mb-3">{card.title}</h3>
-          <p class="text-sm text-[--color-text-secondary] leading-relaxed">{card.description}</p>
+          <p class="text-sm text-(--color-text-secondary) leading-relaxed">{card.description}</p>
           <div class="mt-auto pt-5">
-            <div class="border-t border-[--color-border-subtle] pt-4 text-[0.6rem] font-mono tracking-widest text-[--color-text-muted]">
+            <div class="border-t border-(--color-border-subtle) pt-4 text-[0.6rem] font-mono tracking-widest text-(--color-text-muted)">
               {card.tag}
             </div>
           </div>

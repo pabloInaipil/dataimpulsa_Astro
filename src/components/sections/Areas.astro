@@ -12,7 +12,7 @@ const areas = [
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16 reveal">
-      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+      <div class="text-xs font-medium tracking-widest uppercase text-(--color-purple-400) mb-3" style="font-family: var(--font-mono);">
         // Experiencia
       </div>
       <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight">
@@ -25,8 +25,8 @@ const areas = [
       {areas.map((area, i) => (
         <div
           class:list={[
-            "bg-[--color-card] border border-[--color-border-subtle] rounded-2xl py-8 px-6 text-center transition-all duration-300",
-            "hover:border-[--color-border-accent] hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.2)]",
+            "bg-(--color-card) border border-(--color-border-subtle) rounded-2xl py-8 px-6 text-center transition-all duration-300",
+            "hover:border-(--color-border-accent) hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.2)]",
             "reveal",
             `reveal-delay-${i + 1}`,
           ]}

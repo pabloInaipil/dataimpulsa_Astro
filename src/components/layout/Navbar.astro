@@ -12,7 +12,7 @@ const navLinks = siteConfig.nav;
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-50 px-4 py-3 md:px-6 md:py-5 bg-[--color-deep]/80 backdrop-blur-xl border-b border-[--color-border-subtle] transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-50 px-4 py-3 md:px-6 md:py-5 bg-(--color-deep)/80 backdrop-blur-xl border-b border-(--color-border-subtle) transition-all duration-300"
   id="main-nav"
 >
   <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -33,7 +33,7 @@ const navLinks = siteConfig.nav;
               "text-sm font-medium transition-colors duration-200 no-underline",
               activeLink === link.id
                 ? "text-accent-light"
-                : "text-[--color-text-secondary] hover:text-[--color-text-primary]",
+                : "text-(--color-text-secondary) hover:text-(--color-text-primary)",
             ]}
           >
             {link.label}
@@ -56,7 +56,7 @@ const navLinks = siteConfig.nav;
       <!-- Theme Toggle: visible siempre -->
       <button
         id="theme-toggle"
-        class="w-9 h-9 rounded-lg flex items-center justify-center border border-[--color-border-subtle] bg-transparent cursor-pointer transition-all duration-300 hover:border-[--color-border-accent] text-[--color-text-secondary] hover:text-accent"
+        class="w-9 h-9 rounded-lg flex items-center justify-center border border-(--color-border-subtle) bg-transparent cursor-pointer transition-all duration-300 hover:border-(--color-border-accent) text-(--color-text-secondary) hover:text-accent"
         aria-label="Cambiar tema"
       >
         <span id="icon-dark" class="text-sm hidden">🌙</span>
@@ -69,9 +69,9 @@ const navLinks = siteConfig.nav;
         class="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
         aria-label="Abrir menú"
       >
-        <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300 origin-center" id="bar-1"></span>
-        <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300" id="bar-2"></span>
-        <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300 origin-center" id="bar-3"></span>
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300 origin-center" id="bar-1"></span>
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300" id="bar-2"></span>
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300 origin-center" id="bar-3"></span>
       </button>
 
     </div>
@@ -91,7 +91,7 @@ const navLinks = siteConfig.nav;
               "block text-base font-medium no-underline transition-colors",
               activeLink === link.id
                 ? "text-accent-light"
-                : "text-[--color-text-secondary] hover:text-[--color-text-primary]",
+                : "text-(--color-text-secondary) hover:text-(--color-text-primary)",
             ]}
           >
             {link.label}

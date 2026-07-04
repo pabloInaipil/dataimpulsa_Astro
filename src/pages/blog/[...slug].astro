@@ -23,7 +23,7 @@ const { Content } = await render(post);
     <article class="relative z-[1] pt-32 pb-24 px-6">
       <div class="max-w-3xl mx-auto">
         <!-- Back link -->
-        <a href="/blog" class="inline-flex items-center gap-2 text-sm text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors mb-8">
+        <a href="/blog" class="inline-flex items-center gap-2 text-sm text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors mb-8">
           ← Volver al blog
         </a>
 
@@ -32,7 +32,7 @@ const { Content } = await render(post);
           <div class="flex items-center gap-3 mb-4 flex-wrap">
             <time
               datetime={post.data.pubDate.toISOString()}
-              class="text-xs text-[--color-text-muted]"
+              class="text-xs text-(--color-text-muted)"
               style="font-family: var(--font-mono);"
             >
               {post.data.pubDate.toLocaleDateString("es-CL", {
@@ -41,15 +41,15 @@ const { Content } = await render(post);
                 day: "numeric",
               })}
             </time>
-            <span class="text-xs text-[--color-text-muted]">·</span>
-            <span class="text-xs text-[--color-text-muted]">{post.data.author}</span>
+            <span class="text-xs text-(--color-text-muted)">·</span>
+            <span class="text-xs text-(--color-text-muted)">{post.data.author}</span>
           </div>
           <h1 class="text-[clamp(2rem,4vw,3rem)] font-extrabold leading-tight tracking-tight mb-4">
             {post.data.title}
           </h1>
           <div class="flex flex-wrap gap-2">
             {post.data.tags.map((tag: string) => (
-              <span class="px-3 py-1 rounded-full text-xs text-[--color-purple-400] border border-[--color-border-accent]" style="background: rgba(168, 85, 247, 0.1);">
+              <span class="px-3 py-1 rounded-full text-xs text-(--color-purple-400) border border-(--color-border-accent)" style="background: rgba(168, 85, 247, 0.1);">
                 {tag}
               </span>
             ))}
@@ -58,15 +58,15 @@ const { Content } = await render(post);
 
         <!-- Content -->
         <div class="prose prose-invert max-w-none
-          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-[--color-text-primary]
-          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[--color-text-primary]
-          [&_p]:text-[--color-text-secondary] [&_p]:leading-relaxed [&_p]:mb-6
-          [&_ul]:text-[--color-text-secondary] [&_ul]:mb-6 [&_ul]:pl-6 [&_ul]:list-disc
+          [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-(--color-text-primary)
+          [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-(--color-text-primary)
+          [&_p]:text-(--color-text-secondary) [&_p]:leading-relaxed [&_p]:mb-6
+          [&_ul]:text-(--color-text-secondary) [&_ul]:mb-6 [&_ul]:pl-6 [&_ul]:list-disc
           [&_li]:mb-2 [&_li]:leading-relaxed
-          [&_strong]:text-[--color-text-primary] [&_strong]:font-semibold
-          [&_a]:text-[--color-purple-400] [&_a]:underline [&_a]:hover:text-[--color-purple-500]
-          [&_code]:text-sm [&_code]:bg-[--color-surface] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded
-          [&_pre]:bg-[--color-surface] [&_pre]:rounded-xl [&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6
+          [&_strong]:text-(--color-text-primary) [&_strong]:font-semibold
+          [&_a]:text-(--color-purple-400) [&_a]:underline [&_a]:hover:text-(--color-purple-500)
+          [&_code]:text-sm [&_code]:bg-(--color-surface) [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded
+          [&_pre]:bg-(--color-surface) [&_pre]:rounded-xl [&_pre]:p-6 [&_pre]:overflow-x-auto [&_pre]:mb-6
         ">
           <Content />
         </div>
