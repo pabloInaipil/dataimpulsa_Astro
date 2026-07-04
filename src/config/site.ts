@@ -20,6 +20,8 @@ export const siteConfig = {
   description:
     "Desarrollamos sitios web y landing pages modernos, ligeros y escalables con Astro: máximo rendimiento, SEO perfecto y experiencias increíbles. Además impulsamos tu negocio con automatización IA, web scraping y análisis de datos con Power BI.",
   email: "contacto@dataimpulsa.cl",
+  phone: "+56 9 8857 4082",
+  address: "Ahumada 236 Of. 501, Santiago",
   social: {
     linkedin: "https://www.linkedin.com/company/dataimpulsa",
   },

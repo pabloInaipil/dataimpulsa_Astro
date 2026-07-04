@@ -1,19 +1,23 @@
 ---
 // src/components/sections/Contact.astro
+import { siteConfig } from "@/config/site";
+
+const inputClasses =
+  "w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 focus:border-accent focus:shadow-[0_0_0_3px_var(--color-accent-glow)]";
 ---
 
 <section id="contacto" class="relative z-[1] py-24 px-6 bg-[--color-surface]">
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16 reveal">
-      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+      <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
         // Contacto
       </div>
       <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
-        ¿Listo para transformar tus datos?
+        Conversemos sobre tu próximo proyecto
       </h2>
       <p class="text-lg text-[--color-text-secondary] max-w-xl mx-auto leading-relaxed">
-        Conversemos sobre cómo podemos ayudarte. Sin compromiso.
+        Sitio web, automatización o datos: cuéntanos qué necesitas. Sin compromiso.
       </p>
     </div>
 
@@ -23,38 +27,30 @@
       <div>
         <h3 class="text-2xl font-bold mb-4">Escríbenos directamente</h3>
         <p class="text-[--color-text-secondary] leading-relaxed mb-8">
-          Agenda una consulta gratuita y te mostraremos cómo llevar tu operación al siguiente nivel con datos.
+          Agenda una consulta gratuita: te mostraremos cómo un sitio ultra rápido
+          o una solución de datos puede llevar tu operación al siguiente nivel.
         </p>
 
         <div class="space-y-4">
           <div class="flex items-center gap-4">
-            <div
-              class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent]"
-              style="background: rgba(168, 85, 247, 0.1);"
-            >
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent] bg-accent/10">
               ✉
             </div>
-            <span class="text-[--color-text-secondary]">contacto@dataimpulsa.cl</span>
+            <span class="text-[--color-text-secondary]">{siteConfig.email}</span>
           </div>
 
           <div class="flex items-center gap-4">
-            <div
-              class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent]"
-              style="background: rgba(168, 85, 247, 0.1);"
-            >
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent] bg-accent/10">
               📱
             </div>
-            <span class="text-[--color-text-secondary]">+56 9 8857 4082</span>
+            <span class="text-[--color-text-secondary]">{siteConfig.phone}</span>
           </div>
 
           <div class="flex items-center gap-4">
-            <div
-              class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent]"
-              style="background: rgba(168, 85, 247, 0.1);"
-            >
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-[--color-border-accent] bg-accent/10">
               📍
             </div>
-            <span class="text-[--color-text-secondary]">Ahumada 236 Of. 501, Santiago</span>
+            <span class="text-[--color-text-secondary]">{siteConfig.address}</span>
           </div>
         </div>
       </div>
@@ -65,10 +61,10 @@
         method="POST"
         class="bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-8"
       >
-        <input type="hidden" name="access_key" value="a483aa31-f840-401c-bb54-e7ce5a0c209f" />
+        <input type="hidden" name="access_key" value={siteConfig.web3formsKey} />
         <input type="hidden" name="subject" value="Nuevo contacto desde dataimpulsa.cl" />
         <input type="hidden" name="from_name" value="DatAImpulsa Web" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display:none" />  
+        <input type="checkbox" name="botcheck" class="hidden" />
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
@@ -79,7 +75,7 @@
               name="nombre"
               required
               placeholder="Tu nombre"
-              class="w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 focus:border-[--color-purple-500] focus:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]"
+              class={inputClasses}
             />
           </div>
           <div>
@@ -89,7 +85,7 @@
               id="empresa"
               name="empresa"
               placeholder="Nombre de tu empresa"
-              class="w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 focus:border-[--color-purple-500] focus:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]"
+              class={inputClasses}
             />
           </div>
         </div>
@@ -103,7 +99,7 @@
               name="email"
               required
               placeholder="tu@email.com"
-              class="w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 focus:border-[--color-purple-500] focus:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]"
+              class={inputClasses}
             />
           </div>
           <div>
@@ -113,7 +109,7 @@
               id="telefono"
               name="telefono"
               placeholder="+56 9 ..."
-              class="w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 focus:border-[--color-purple-500] focus:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]"
+              class={inputClasses}
             />
           </div>
         </div>
@@ -126,14 +122,13 @@
             required
             rows="4"
             placeholder="Cuéntanos sobre tu proyecto..."
-            class="w-full px-4 py-3 bg-[--color-surface] border border-[--color-border-subtle] rounded-lg text-[--color-text-primary] text-sm outline-none transition-all duration-200 resize-y focus:border-[--color-purple-500] focus:shadow-[0_0_0_3px_rgba(168,85,247,0.1)]"
+            class:list={[inputClasses, "resize-y"]}
           ></textarea>
         </div>
 
         <button
           type="submit"
-          class="w-full py-3.5 rounded-lg text-sm font-semibold text-white border-none cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(168,85,247,0.3)]"
-          style="background: linear-gradient(135deg, var(--color-purple-600), var(--color-purple-700)); font-family: var(--font-display);"
+          class="w-full py-3.5 rounded-lg text-sm font-semibold text-white border-none cursor-pointer transition-all duration-300 bg-accent hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-[0_10px_30px_var(--color-accent-glow-strong)]"
         >
           Enviar mensaje →
         </button>
