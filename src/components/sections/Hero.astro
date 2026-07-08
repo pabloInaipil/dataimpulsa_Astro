@@ -1,142 +1,67 @@
 ---
 // src/components/sections/Hero.astro
+import { siteConfig } from "@/config/site";
 ---
 
-<section class="relative min-h-screen flex items-center pt-32 pb-16 px-6 overflow-hidden">
-  <!-- Glow Effects -->
-  <div
-    class="absolute -top-[200px] -right-[200px] w-[700px] h-[700px] pointer-events-none"
-    style="background: radial-gradient(circle, var(--color-violet-glow-strong) 0%, transparent 70%); animation: pulse-glow 8s ease-in-out infinite;"
-  ></div>
-  <div
-    class="absolute -bottom-[100px] -left-[200px] w-[500px] h-[500px] pointer-events-none"
-    style="background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%); animation: pulse-glow 10s ease-in-out infinite reverse;"
-  ></div>
+<section class="relative min-h-screen flex items-center justify-center pt-36 pb-20 px-6 overflow-hidden">
+  <!-- Glow effects (background-image por CSS, sin <img>) -->
+  <div class="hero-glow-main absolute -top-[250px] left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"></div>
+  <div class="hero-glow-side absolute -bottom-[150px] -left-[200px] w-[500px] h-[500px] pointer-events-none"></div>
 
-  <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-[1]">
-    <!-- Content -->
-    <div class="text-center lg:text-left">
-      <div
-        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium text-[--color-purple-400] mb-6 border border-[--color-border-accent]"
-        style="background: rgba(168, 85, 247, 0.1); font-family: var(--font-mono);"
-      >
-        <span class="w-1.5 h-1.5 rounded-full bg-[--color-purple-500]" style="animation: blink 2s ease-in-out infinite;"></span>
-        Agencia Digital para PYMEs
-      </div>
-
-      <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-[1.1] mb-6 tracking-tight">
-        Tu empresa visible,<br />
-        <span class="gradient-text">automatizada e inteligente</span>
-      </h1>
-
-      <p class="text-lg text-[--color-text-secondary] leading-relaxed mb-10 max-w-[520px] mx-auto lg:mx-0">
-        Sitios web de alto rendimiento, dashboards en tiempo real y automatización
-        de procesos — todo lo que tu PYME necesita para crecer con datos.
-      </p>
-
-      <div class="flex gap-4 items-center justify-center lg:justify-start flex-wrap">
-        <a
-          href="#contacto"
-          class="inline-block px-6 py-3 rounded-lg text-sm font-semibold text-white no-underline transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(168,85,247,0.3)]"
-          style="background: linear-gradient(135deg, var(--color-purple-600), var(--color-purple-700));"
-        >
-          Agendar consulta
-        </a>
-        <a
-          href="#servicios"
-          class="inline-block px-6 py-3 rounded-lg text-sm font-semibold text-[--color-text-primary] no-underline border border-[--color-border-subtle] transition-all duration-300 hover:border-[--color-border-accent]"
-          style="background: transparent;"
-        >
-          Ver servicios →
-        </a>
-      </div>
+  <div class="max-w-4xl mx-auto text-center relative z-[1]">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium font-mono text-accent-light mb-8 border border-(--color-border-accent) bg-accent/10">
+      <span class="badge-dot w-1.5 h-1.5 rounded-full bg-accent"></span>
+      ⚡ Desarrollo web ultra rápido con Astro
     </div>
 
-    <!-- Dashboard Mock Visual -->
-    <div class="relative flex justify-center items-center">
-      <!-- Floating Badges -->
-      <div
-        class="absolute top-[10%] -right-[5%] z-[2] px-4 py-2.5 rounded-xl text-xs text-[--color-text-secondary] border border-[--color-border-accent] bg-[--color-card] shadow-[0_10px_40px_rgba(0,0,0,0.3)] hidden lg:block"
-        style="font-family: var(--font-mono); animation: float 6s ease-in-out infinite;"
+    <h1 class="text-[clamp(2.6rem,6vw,4.6rem)] font-extrabold leading-[1.08] tracking-tight mb-6">
+      Sitios web hiper rápidos<br />
+      con <span class="gradient-text">Astro.</span> 🚀
+    </h1>
+
+    <p class="text-lg md:text-xl text-(--color-text-secondary) leading-relaxed mb-10 max-w-[640px] mx-auto">
+      Desarrollamos sitios web modernos, ligeros y escalables con Astro.
+      Máximo rendimiento, SEO perfecto y experiencias increíbles.
+    </p>
+
+    <div class="flex gap-4 items-center justify-center flex-wrap">
+      <a
+        href={siteConfig.cta.href}
+        class="inline-block px-7 py-3.5 rounded-lg text-sm font-semibold text-white no-underline transition-all duration-300 bg-accent hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-[0_10px_30px_var(--color-accent-glow-strong)]"
       >
-        <span class="text-[--color-purple-400] font-semibold">+42%</span> eficiencia operativa
-      </div>
-      <div
-        class="absolute bottom-[15%] -left-[5%] z-[2] px-4 py-2.5 rounded-xl text-xs text-[--color-text-secondary] border border-[--color-border-accent] bg-[--color-card] shadow-[0_10px_40px_rgba(0,0,0,0.3)] hidden lg:block"
-        style="font-family: var(--font-mono); animation: float 6s ease-in-out infinite 2s;"
+        {siteConfig.cta.label}
+      </a>
+      <a
+        href="/#casos"
+        class="inline-block px-7 py-3.5 rounded-lg text-sm font-semibold text-(--color-text-primary) no-underline border border-(--color-border-subtle) bg-transparent transition-all duration-300 hover:border-(--color-border-accent)"
       >
-        ⚡ <span class="text-[--color-purple-400] font-semibold">Real-time</span> sync
-      </div>
-
-      <!-- Dashboard -->
-      <div
-        class="w-full max-w-[520px] aspect-[4/3] bg-[--color-card] border border-[--color-border-subtle] rounded-2xl p-6 relative overflow-hidden"
-        style="box-shadow: 0 25px 80px rgba(0,0,0,0.5), 0 0 60px var(--color-violet-glow);"
-      >
-        <!-- Top glow line -->
-        <div class="absolute top-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent, var(--color-purple-500), transparent);"></div>
-
-        <!-- Window dots -->
-        <div class="flex items-center gap-2 mb-5">
-          <span class="w-2 h-2 rounded-full bg-red-500"></span>
-          <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-          <span class="w-2 h-2 rounded-full bg-green-500"></span>
-          <div class="flex-1 h-2.5 bg-[--color-surface] rounded ml-2"></div>
-        </div>
-
-        <!-- Chart Grid -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: calc(100% - 40px);">
-          <!-- Bar Chart -->
-          <div style="background: var(--color-surface); border-radius: 12px; padding: 12px; display: flex; flex-direction: column;">
-            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-bottom: 8px; font-family: var(--font-mono);">REVENUE</div>
-            <div style="display: flex; align-items: flex-end; gap: 4px; flex: 1;">
-              <div style="flex: 1; height: 60%; background: #7e22ce; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.1s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 85%; background: #9333ea; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.2s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 45%; background: #7e22ce; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.3s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 95%; background: #a855f7; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.4s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 70%; background: #9333ea; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.5s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 55%; background: #7e22ce; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.6s both; transform-origin: bottom;"></div>
-              <div style="flex: 1; height: 80%; background: #a855f7; border-radius: 3px 3px 0 0; animation: grow-bar 2s ease-out 0.7s both; transform-origin: bottom;"></div>
-            </div>
-          </div>
-
-          <!-- Metric -->
-          <div style="background: var(--color-surface); border-radius: 12px; padding: 12px;">
-            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-bottom: 8px; font-family: var(--font-mono);">GROWTH</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #c084fc; font-family: var(--font-mono);">$2.4M</div>
-            <div style="font-size: 0.75rem; color: #22c55e; font-family: var(--font-mono);">↑ 23.5%</div>
-          </div>
-
-          <!-- Donut -->
-          <div style="background: var(--color-surface); border-radius: 12px; padding: 12px;">
-            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-bottom: 8px; font-family: var(--font-mono);">SEGMENTS</div>
-            <div style="width: 56px; height: 56px; border-radius: 50%; margin: 8px auto 0; border: 6px solid var(--color-card); background: conic-gradient(#a855f7 0% 65%, #7e22ce 65% 85%, var(--color-card) 85% 100%);"></div>
-          </div>
-
-          <!-- KPIs -->
-          <div style="background: var(--color-surface); border-radius: 12px; padding: 12px; display: flex; flex-direction: column;">
-            <div style="font-size: 0.65rem; color: var(--color-text-muted); margin-bottom: 8px; font-family: var(--font-mono);">KPIs</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;">
-              <div style="background: var(--color-card); border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px;">
-                <span style="font-size: 0.9rem; font-weight: 700; color: #c084fc; font-family: var(--font-mono);">98%</span>
-                <span style="font-size: 0.5rem; color: var(--color-text-muted);">Uptime</span>
-              </div>
-              <div style="background: var(--color-card); border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px;">
-                <span style="font-size: 0.9rem; font-weight: 700; color: #c084fc; font-family: var(--font-mono);">1.2s</span>
-                <span style="font-size: 0.5rem; color: var(--color-text-muted);">Latency</span>
-              </div>
-              <div style="background: var(--color-card); border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px;">
-                <span style="font-size: 0.9rem; font-weight: 700; color: #c084fc; font-family: var(--font-mono);">847</span>
-                <span style="font-size: 0.5rem; color: var(--color-text-muted);">Users</span>
-              </div>
-              <div style="background: var(--color-card); border-radius: 6px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px;">
-                <span style="font-size: 0.9rem; font-weight: 700; color: #c084fc; font-family: var(--font-mono);">4.9</span>
-                <span style="font-size: 0.5rem; color: var(--color-text-muted);">Rating</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        Ver casos de éxito →
+      </a>
     </div>
   </div>
 </section>
+
+<style>
+  .hero-glow-main {
+    background-image: radial-gradient(
+      circle,
+      var(--color-accent-glow-strong) 0%,
+      transparent 70%
+    );
+    animation: pulse-glow 8s ease-in-out infinite;
+  }
+
+  .hero-glow-side {
+    background-image: radial-gradient(
+      circle,
+      var(--color-accent-glow) 0%,
+      transparent 70%
+    );
+    animation: pulse-glow 10s ease-in-out infinite reverse;
+  }
+
+  .badge-dot {
+    animation: blink 2s ease-in-out infinite;
+  }
+</style>

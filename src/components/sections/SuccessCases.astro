@@ -1,0 +1,98 @@
+---
+// src/components/sections/SuccessCases.astro
+// Casos de éxito con métricas de rendimiento (mock de navegador en CSS, sin assets).
+const cases = [
+  {
+    name: "Agencia de Marketing",
+    metrics: [
+      { value: "98", label: "PageSpeed" },
+      { value: "0.7s", label: "Carga" },
+      { value: "+120%", label: "Tráfico orgánico", highlight: true },
+    ],
+  },
+  {
+    name: "Plataforma SaaS",
+    metrics: [
+      { value: "99", label: "PageSpeed" },
+      { value: "0.5s", label: "Carga" },
+      { value: "+85%", label: "Leads generados", highlight: true },
+    ],
+  },
+  {
+    name: "E-commerce",
+    metrics: [
+      { value: "97", label: "PageSpeed" },
+      { value: "0.6s", label: "Carga" },
+      { value: "+65%", label: "Ventas", highlight: true },
+    ],
+  },
+];
+---
+
+<section id="casos" class="relative z-[1] py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
+        // Casos de éxito
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight">
+        Resultados que hablan por sí solos
+      </h2>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {cases.map((c, i) => (
+        <div
+          class:list={[
+            "group bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-6 transition-all duration-400",
+            "hover:border-(--color-border-accent) hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-accent-glow)]",
+            "reveal",
+            `reveal-delay-${i + 1}`,
+          ]}
+        >
+          <!-- Mock de navegador -->
+          <div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-xl p-4 mb-6">
+            <div class="flex items-center gap-1.5 mb-3">
+              <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
+              <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
+              <span class="w-2 h-2 rounded-full bg-green-500/60"></span>
+              <span class="flex-1 h-2 bg-(--color-card-hover) rounded ml-2"></span>
+            </div>
+            <div class="h-3 w-2/3 bg-(--color-card-hover) rounded mb-2"></div>
+            <div class="h-3 w-1/2 bg-(--color-card-hover) rounded mb-4"></div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="h-10 bg-(--color-card-hover) rounded"></div>
+              <div class="h-10 bg-(--color-card-hover) rounded"></div>
+              <div class="h-10 bg-(--color-card-hover) rounded"></div>
+            </div>
+          </div>
+
+          <h3 class="text-base font-semibold mb-5">{c.name}</h3>
+
+          <div class="grid grid-cols-3 gap-2">
+            {c.metrics.map((m) => (
+              <div class="text-center">
+                <div class:list={["text-lg font-bold font-mono", m.highlight ? "text-accent-light" : ""]}>
+                  {m.value}
+                </div>
+                <div class="text-[0.65rem] text-(--color-text-muted) leading-tight mt-1">{m.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center reveal">
+      <a
+        href="/portafolio"
+        class="inline-block px-6 py-3 rounded-lg text-sm font-semibold text-(--color-text-primary) no-underline border border-(--color-border-subtle) transition-all duration-300 hover:border-(--color-border-accent) hover:text-accent-light"
+      >
+        Ver todos los casos de éxito →
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,95 @@
+---
+// src/components/sections/Technology.astro
+// "Astro: el futuro del desarrollo web" — texto + diagrama orbital simple en CSS.
+const bullets = [
+  "Súper rápido por defecto",
+  "SEO perfecto y accesibilidad",
+  "Integración con tus herramientas favoritas",
+  "Fácil de mantener y escalar",
+];
+
+const orbitBadges = [
+  { symbol: "⚛", label: "React", position: "top-[6%] right-[14%]" },
+  { symbol: "V", label: "Vue", position: "top-[38%] -left-[2%]" },
+  { symbol: "S", label: "Svelte", position: "bottom-[8%] right-[8%]" },
+  { symbol: "~", label: "Tailwind CSS", position: "bottom-[2%] left-[28%]" },
+];
+---
+
+<section id="tecnologia" class="relative z-[1] py-24 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Texto -->
+    <div class="reveal">
+      <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
+        // Tecnología
+      </div>
+      <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-5 leading-tight">
+        Astro: el futuro del<br />desarrollo web
+      </h2>
+      <p class="text-lg text-(--color-text-secondary) leading-relaxed mb-8 max-w-[480px]">
+        Utilizamos Astro para construir sitios estáticos ultra rápidos, con
+        JavaScript solo cuando lo necesitas. Menos código, más rendimiento.
+      </p>
+
+      <ul class="flex flex-col gap-3 mb-10 list-none">
+        {bullets.map((b) => (
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 rounded-full grid place-items-center shrink-0 bg-accent/15 text-accent text-xs font-bold">✓</span>
+            <span class="text-sm text-(--color-text-secondary)">{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href="https://astro.build"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block px-6 py-3 rounded-lg text-sm font-semibold text-(--color-text-primary) no-underline border border-(--color-border-subtle) transition-all duration-300 hover:border-(--color-border-accent) hover:text-accent-light"
+      >
+        Conoce más sobre Astro →
+      </a>
+    </div>
+
+    <!-- Diagrama orbital (solo CSS, sin JS) -->
+    <div class="relative w-full max-w-[480px] aspect-square mx-auto reveal reveal-delay-2">
+      <!-- Órbitas -->
+      <div class="absolute inset-[6%] rounded-full border border-dashed border-(--color-border-accent) orbit-slow"></div>
+      <div class="absolute inset-[22%] rounded-full border border-(--color-border-subtle)"></div>
+
+      <!-- Centro: wordmark -->
+      <div class="absolute inset-0 grid place-items-center">
+        <div class="text-center">
+          <div class="text-6xl mb-2">🚀</div>
+          <div class="text-4xl font-extrabold tracking-tight gradient-text">astro</div>
+        </div>
+      </div>
+
+      <!-- Badges de frameworks sobre las órbitas -->
+      {orbitBadges.map((b) => (
+        <span
+          class:list={[
+            "absolute w-12 h-12 rounded-full grid place-items-center text-lg font-bold",
+            "bg-(--color-card) border border-(--color-border-subtle) text-(--color-text-secondary) shadow-[0_10px_30px_rgba(0,0,0,0.4)]",
+            b.position,
+          ]}
+          title={b.label}
+        >
+          {b.symbol}
+        </span>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .orbit-slow {
+    animation: spin 90s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>

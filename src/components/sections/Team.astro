@@ -45,13 +45,13 @@ const team: TeamMember[] = [
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="mb-16 reveal">
-      <div class="text-xs font-medium tracking-widest uppercase text-[--color-purple-400] mb-3" style="font-family: var(--font-mono);">
+      <div class="text-xs font-medium tracking-widest uppercase text-(--color-purple-400) mb-3" style="font-family: var(--font-mono);">
         // Equipo
       </div>
       <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight mb-4">
         Las personas detrás de los datos
       </h2>
-      <p class="text-lg text-[--color-text-secondary] max-w-xl leading-relaxed">
+      <p class="text-lg text-(--color-text-secondary) max-w-xl leading-relaxed">
         Profesionales especializados en transformar complejidad en claridad.
       </p>
     </div>
@@ -61,15 +61,15 @@ const team: TeamMember[] = [
       {team.map((member, i) => (
         <div
           class:list={[
-            "bg-[--color-card] border border-[--color-border-subtle] rounded-2xl overflow-hidden transition-all duration-400",
-            "hover:border-[--color-border-accent] hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
+            "bg-(--color-card) border border-(--color-border-subtle) rounded-2xl overflow-hidden transition-all duration-400",
+            "hover:border-(--color-border-accent) hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
             "reveal",
             `reveal-delay-${i + 1}`,
           ]}
         >
           <!-- Photo placeholder -->
           <div
-            class="w-full aspect-square flex items-center justify-center text-5xl text-[--color-text-muted] relative overflow-hidden"
+            class="w-full aspect-square flex items-center justify-center text-5xl text-(--color-text-muted) relative overflow-hidden"
             style="background: linear-gradient(135deg, #1a1a3e, #2a1a4e);"
           >
             {member.photo ? (
@@ -84,10 +84,10 @@ const team: TeamMember[] = [
           <!-- Info -->
           <div class="p-5">
             <h4 class="text-base font-semibold mb-1">{member.name}</h4>
-            <div class="text-xs text-[--color-purple-400] mb-2" style="font-family: var(--font-mono);">
+            <div class="text-xs text-(--color-purple-400) mb-2" style="font-family: var(--font-mono);">
               {member.role}
             </div>
-            <div class="text-xs text-[--color-text-muted] leading-relaxed mb-3">
+            <div class="text-xs text-(--color-text-muted) leading-relaxed mb-3">
               {member.skills}
             </div>
             <div class="flex gap-3">
@@ -96,7 +96,7 @@ const team: TeamMember[] = [
                   href={member.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-xs text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+                  class="text-xs text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors"
                   aria-label={`${member.name} en X`}
                 >
                   𝕏
@@ -106,7 +106,7 @@ const team: TeamMember[] = [
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-xs text-[--color-text-muted] no-underline hover:text-[--color-purple-400] transition-colors"
+                class="text-xs text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors"
                 aria-label={`${member.name} en LinkedIn`}
               >
                 LinkedIn

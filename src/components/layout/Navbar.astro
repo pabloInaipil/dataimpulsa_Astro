@@ -1,30 +1,27 @@
 ---
 // src/components/layout/Navbar.astro
+import { siteConfig } from "@/config/site";
+
 interface Props {
   activeLink?: string;
 }
 
 const { activeLink = "inicio" } = Astro.props;
 
-const navLinks = [
-  { href: "/", label: "Inicio", id: "inicio" },
-  { href: "/nosotros", label: "Nosotros", id: "nosotros" },
-  { href: "/portafolio", label: "Portafolio", id: "portafolio" },
-  { href: "/blog", label: "Blog", id: "blog" },
-];
+const navLinks = siteConfig.nav;
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-50 px-4 py-3 md:px-6 md:py-5 bg-[--color-deep]/80 backdrop-blur-xl border-b border-[--color-border-subtle] transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-50 px-4 py-3 md:px-6 md:py-5 bg-(--color-deep)/80 backdrop-blur-xl border-b border-(--color-border-subtle) transition-all duration-300"
   id="main-nav"
 >
   <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <!-- Logo -->
 
- <a href="/" class="flex items-center gap-2 no-underline">
-  <img src="/images/logo/dark.png" alt="DatAImpulsa" class="h-10 md:h-16 w-auto block light:hidden" />
-  <img src="/images/logo/light.png" alt="DatAImpulsa" class="h-10 md:h-16 w-auto hidden light:block" />
-</a>
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 no-underline">
+      <img src="/logo-nuevo-dataimpulsa.png" alt="DatAImpulsa" class="h-10 md:h-14 w-auto block light:hidden" />
+      <img src="/images/logo/light.png" alt="DatAImpulsa" class="h-10 md:h-14 w-auto hidden light:block" />
+    </a>
 
     <!-- Desktop Links -->
     <ul class="hidden md:flex items-center gap-8 list-none">
@@ -35,8 +32,8 @@ const navLinks = [
             class:list={[
               "text-sm font-medium transition-colors duration-200 no-underline",
               activeLink === link.id
-                ? "text-[--color-purple-400]"
-                : "text-[--color-text-secondary] hover:text-[--color-text-primary]",
+                ? "text-accent-light"
+                : "text-(--color-text-secondary) hover:text-(--color-text-primary)",
             ]}
           >
             {link.label}
@@ -45,34 +42,39 @@ const navLinks = [
       ))}
       <li>
         <a
-          href="/#contacto"
-          class="inline-block px-5 py-2.5 rounded-lg text-sm font-semibold text-white no-underline transition-all duration-300 hover:-translate-y-0.5"
-          style="background: linear-gradient(135deg, var(--color-purple-600), var(--color-purple-700));"
+          href={siteConfig.cta.href}
+          class="inline-block px-5 py-2.5 rounded-lg text-sm font-semibold text-white no-underline transition-all duration-300 bg-accent hover:bg-accent-hover hover:-translate-y-0.5"
         >
-          Contáctanos
+          {siteConfig.cta.label}
         </a>
       </li>
     </ul>
-    <!-- Theme Toggle -->
-    <button
-      id="theme-toggle"
-      class="w-9 h-9 rounded-lg flex items-center justify-center border border-[--color-border-subtle] bg-transparent cursor-pointer transition-all duration-300 hover:border-[--color-border-accent] text-[--color-text-secondary] hover:text-[--color-purple-400]"
-      aria-label="Cambiar tema"
-    >
-      <span id="icon-dark" class="text-sm hidden">🌙</span>
-      <span id="icon-light" class="text-sm hidden">☀️</span>
-    </button>
 
-    <!-- Mobile Hamburger -->
-    <button
-      class="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
-      id="mobile-toggle"
-      aria-label="Abrir menú"
-    >
-      <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300 origin-center" id="bar-1"></span>
-      <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300" id="bar-2"></span>
-      <span class="block w-6 h-0.5 bg-[--color-text-primary] transition-all duration-300 origin-center" id="bar-3"></span>
-    </button>
+    <!-- Botones derecha: Theme Toggle + Hamburger agrupados -->
+    <div class="flex items-center gap-2">
+
+      <!-- Theme Toggle: visible siempre -->
+      <button
+        id="theme-toggle"
+        class="w-9 h-9 rounded-lg flex items-center justify-center border border-(--color-border-subtle) bg-transparent cursor-pointer transition-all duration-300 hover:border-(--color-border-accent) text-(--color-text-secondary) hover:text-accent"
+        aria-label="Cambiar tema"
+      >
+        <span id="icon-dark" class="text-sm hidden">🌙</span>
+        <span id="icon-light" class="text-sm hidden">☀️</span>
+      </button>
+
+      <!-- Mobile Hamburger: solo en móvil -->
+      <button
+        id="mobile-toggle"
+        class="md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer"
+        aria-label="Abrir menú"
+      >
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300 origin-center" id="bar-1"></span>
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300" id="bar-2"></span>
+        <span class="block w-6 h-0.5 bg-(--color-text-primary) transition-all duration-300 origin-center" id="bar-3"></span>
+      </button>
+
+    </div>
   </div>
 
   <!-- Mobile Menu -->
@@ -88,8 +90,8 @@ const navLinks = [
             class:list={[
               "block text-base font-medium no-underline transition-colors",
               activeLink === link.id
-                ? "text-[--color-purple-400]"
-                : "text-[--color-text-secondary] hover:text-[--color-text-primary]",
+                ? "text-accent-light"
+                : "text-(--color-text-secondary) hover:text-(--color-text-primary)",
             ]}
           >
             {link.label}
@@ -98,11 +100,10 @@ const navLinks = [
       ))}
       <li>
         <a
-          href="/#contacto"
-          class="inline-block px-5 py-2.5 rounded-lg text-sm font-semibold text-white no-underline mt-2"
-          style="background: linear-gradient(135deg, var(--color-purple-600), var(--color-purple-700));"
+          href={siteConfig.cta.href}
+          class="inline-block px-5 py-2.5 rounded-lg text-sm font-semibold text-white no-underline mt-2 bg-accent hover:bg-accent-hover"
         >
-          Contáctanos
+          {siteConfig.cta.label}
         </a>
       </li>
     </ul>
@@ -111,7 +112,7 @@ const navLinks = [
 
 <script>
   const toggle = document.getElementById("mobile-toggle");
-  const menu = document.getElementById("mobile-menu");
+  const menu = document.getElementById("mobile-menu") as HTMLElement | null;
   const bar1 = document.getElementById("bar-1");
   const bar2 = document.getElementById("bar-2");
   const bar3 = document.getElementById("bar-3");
@@ -119,13 +120,24 @@ const navLinks = [
 
   toggle?.addEventListener("click", () => {
     isOpen = !isOpen;
+
     if (menu) {
-      menu.style.maxHeight = isOpen ? `${menu.scrollHeight}px` : "0";
+      if (isOpen) {
+        // Medir la altura real antes de animar
+        menu.style.maxHeight = "none";
+        const fullHeight = menu.scrollHeight;
+        menu.style.maxHeight = "0";
+        menu.offsetHeight;
+        menu.style.maxHeight = `${fullHeight}px`;
+      } else {
+        menu.style.maxHeight = "0";
+      }
     }
+
     bar1?.classList.toggle("rotate-45", isOpen);
-    bar1?.classList.toggle("translate-y-[4px]", isOpen);
+    bar1?.classList.toggle("translate-y-[8px]", isOpen);
     bar2?.classList.toggle("opacity-0", isOpen);
     bar3?.classList.toggle("-rotate-45", isOpen);
-    bar3?.classList.toggle("-translate-y-[4px]", isOpen);
+    bar3?.classList.toggle("-translate-y-[8px]", isOpen);
   });
 </script>
