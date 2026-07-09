@@ -1,9 +1,11 @@
 ---
 // src/components/sections/SuccessCases.astro
-// Casos de éxito con métricas de rendimiento (mock de navegador en CSS, sin assets).
+// Casos de éxito con métricas de rendimiento (thumbnail real dentro de mock de navegador).
 const cases = [
   {
     name: "TodoCasa Construcciones",
+    image: "/todocasathumb.png",
+    alt: "Sitio web de TodoCasa Construcciones",
     metrics: [
       { value: "98", label: "PageSpeed" },
       { value: "0.7s", label: "Carga" },
@@ -12,6 +14,8 @@ const cases = [
   },
   {
     name: "Ravacor Servicios SpA",
+    image: "/ravacorthumb.png",
+    alt: "Sitio web de Ravacor Servicios SpA",
     metrics: [
       { value: "99", label: "PageSpeed" },
       { value: "0.5s", label: "Carga" },
@@ -20,6 +24,8 @@ const cases = [
   },
   {
     name: "Art-Rochelo",
+    image: "/art-rochelothumb.png",
+    alt: "Sitio web de Art-Rochelo",
     metrics: [
       { value: "97", label: "PageSpeed" },
       { value: "0.6s", label: "Carga" },
@@ -60,13 +66,15 @@ const cases = [
               <span class="w-2 h-2 rounded-full bg-green-500/60"></span>
               <span class="flex-1 h-2 bg-(--color-card-hover) rounded ml-2"></span>
             </div>
-            <div class="h-3 w-2/3 bg-(--color-card-hover) rounded mb-2"></div>
-            <div class="h-3 w-1/2 bg-(--color-card-hover) rounded mb-4"></div>
-            <div class="grid grid-cols-3 gap-2">
-              <div class="h-10 bg-(--color-card-hover) rounded"></div>
-              <div class="h-10 bg-(--color-card-hover) rounded"></div>
-              <div class="h-10 bg-(--color-card-hover) rounded"></div>
-            </div>
+            <img
+              src={c.image}
+              alt={c.alt}
+              width="640"
+              height="400"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[16/10] object-cover object-top rounded-lg"
+            />
           </div>
 
           <h3 class="text-base font-semibold mb-5">{c.name}</h3>
