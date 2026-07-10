@@ -1,6 +1,6 @@
 ---
 // src/components/sections/Technology.astro
-// "Astro: el futuro del desarrollo web" — texto + diagrama orbital simple en CSS.
+// "Astro: el futuro del desarrollo web" — texto + diagrama orbital animado en CSS.
 const bullets = [
   "Súper rápido por defecto",
   "SEO perfecto y accesibilidad",
@@ -8,11 +8,13 @@ const bullets = [
   "Fácil de mantener y escalar",
 ];
 
+// Cada badge orbita el anillo punteado: ángulo inicial y velocidad propios
+// (definidos en las clases .orbit-* del <style> scoped).
 const orbitBadges = [
-  { symbol: "⚛", label: "React", position: "top-[6%] right-[14%]" },
-  { symbol: "V", label: "Vue", position: "top-[38%] -left-[2%]" },
-  { symbol: "S", label: "Svelte", position: "bottom-[8%] right-[8%]" },
-  { symbol: "~", label: "Tailwind CSS", position: "bottom-[2%] left-[28%]" },
+  { symbol: "⚛", label: "React", orbit: "orbit-react" },
+  { symbol: "V", label: "Vue", orbit: "orbit-vue" },
+  { symbol: "S", label: "Svelte", orbit: "orbit-svelte" },
+  { symbol: "~", label: "Tailwind CSS", orbit: "orbit-tailwind" },
 ];
 ---
 
@@ -54,29 +56,29 @@ const orbitBadges = [
     <!-- Diagrama orbital (solo CSS, sin JS) -->
     <div class="relative w-full max-w-[480px] aspect-square mx-auto reveal reveal-delay-2">
       <!-- Órbitas -->
-      <div class="absolute inset-[6%] rounded-full border border-dashed border-(--color-border-accent) orbit-slow"></div>
+      <div class="absolute inset-[6%] rounded-full border border-dashed border-(--color-border-accent)"></div>
       <div class="absolute inset-[22%] rounded-full border border-(--color-border-subtle)"></div>
 
-      <!-- Centro: wordmark -->
+      <!-- Centro: wordmark con float sutil -->
       <div class="absolute inset-0 grid place-items-center">
-        <div class="text-center">
+        <div class="text-center float-center">
           <div class="text-6xl mb-2">🚀</div>
           <div class="text-4xl font-extrabold tracking-tight gradient-text">astro</div>
         </div>
       </div>
 
-      <!-- Badges de frameworks sobre las órbitas -->
+      <!-- Badges de frameworks orbitando el anillo punteado.
+           El brazo (mismo tamaño que el anillo) rota; el badge, anclado a su
+           borde, contra-rota a la misma velocidad para quedar siempre derecho. -->
       {orbitBadges.map((b) => (
-        <span
-          class:list={[
-            "absolute w-12 h-12 rounded-full grid place-items-center text-lg font-bold",
-            "bg-(--color-card) border border-(--color-border-subtle) text-(--color-text-secondary) shadow-[0_10px_30px_rgba(0,0,0,0.4)]",
-            b.position,
-          ]}
-          title={b.label}
-        >
-          {b.symbol}
-        </span>
+        <div class:list={["orbit-arm absolute inset-[6%] pointer-events-none", b.orbit]}>
+          <span
+            class="orbit-badge absolute top-1/2 left-full -m-6 w-12 h-12 rounded-full grid place-items-center text-lg font-bold bg-(--color-card) border border-(--color-border-subtle) text-(--color-text-secondary) shadow-[0_10px_30px_rgba(0,0,0,0.4)] pointer-events-auto"
+            title={b.label}
+          >
+            {b.symbol}
+          </span>
+        </div>
       ))}
     </div>
 
@@ -84,12 +86,53 @@ const orbitBadges = [
 </section>
 
 <style>
-  .orbit-slow {
-    animation: spin 90s linear infinite;
+  /* Ángulo inicial y período de cada planeta. Duraciones deliberadamente
+     desfasadas para que no se muevan como bloque rígido. */
+  .orbit-react    { --orbit-angle: 315deg; --orbit-duration: 40s; }
+  .orbit-vue      { --orbit-angle: 200deg; --orbit-duration: 46s; }
+  .orbit-svelte   { --orbit-angle:  60deg; --orbit-duration: 52s; }
+  .orbit-tailwind { --orbit-angle: 120deg; --orbit-duration: 58s; }
+
+  /* El transform base (sin animación) deja cada planeta en su ángulo inicial:
+     con reduced-motion quedan distribuidos, no apilados. */
+  .orbit-arm {
+    transform: rotate(var(--orbit-angle));
+    animation: orbit var(--orbit-duration) linear infinite;
+    will-change: transform;
   }
 
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  .orbit-badge {
+    transform: rotate(calc(var(--orbit-angle) * -1));
+    animation: orbit-counter var(--orbit-duration) linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(var(--orbit-angle)); }
+    to   { transform: rotate(calc(var(--orbit-angle) + 360deg)); }
+  }
+
+  /* Misma duración y timing lineal que `orbit`, sentido inverso: la rotación
+     neta del contenido es 0 y el ícono nunca queda de cabeza. */
+  @keyframes orbit-counter {
+    from { transform: rotate(calc(var(--orbit-angle) * -1)); }
+    to   { transform: rotate(calc(var(--orbit-angle) * -1 - 360deg)); }
+  }
+
+  .float-center {
+    animation: float-y 4s ease-in-out infinite;
+  }
+
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-arm,
+    .orbit-badge,
+    .float-center {
+      animation: none;
+    }
   }
 </style>
