@@ -220,6 +220,7 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
     const INTERVAL = 6000;
     let current = 0;
     let timer: number | undefined;
+    let hovered = false;
 
     function goTo(index: number) {
       current = (index + slides.length) % slides.length;
@@ -234,8 +235,10 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
     }
 
     function start() {
-      if (reducedMotion.matches || timer !== undefined) return;
-      if (root.contains(document.activeElement)) return;
+      if (reducedMotion.matches || timer !== undefined || hovered) return;
+      // Solo el foco de teclado (focus-visible) mantiene la pausa;
+      // el foco residual de un click/tap no debe frenar el autoplay.
+      if (root.querySelector(":focus-visible")) return;
       timer = window.setInterval(() => goTo(current + 1), INTERVAL);
     }
 
@@ -264,10 +267,24 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
       restart();
     });
 
-    // Pausa en hover y en foco de teclado; reanuda al salir.
-    root.addEventListener("mouseenter", stop);
-    root.addEventListener("mouseleave", start);
-    root.addEventListener("focusin", stop);
+    // Pausa en hover (solo puntero mouse: en táctil el tap dispara
+    // mouseenter sintético sin mouseleave y dejaba el autoplay muerto)
+    // y en foco de teclado; reanuda al salir.
+    root.addEventListener("pointerenter", (e) => {
+      if (e.pointerType === "mouse") {
+        hovered = true;
+        stop();
+      }
+    });
+    root.addEventListener("pointerleave", (e) => {
+      if (e.pointerType === "mouse") {
+        hovered = false;
+        start();
+      }
+    });
+    root.addEventListener("focusin", () => {
+      if (root.querySelector(":focus-visible")) stop();
+    });
     root.addEventListener("focusout", (e) => {
       if (!root.contains(e.relatedTarget as Node | null)) start();
     });
