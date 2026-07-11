@@ -12,17 +12,19 @@ import { siteConfig } from "@/config/site";
 
   <!-- Horizonte curvo "amanecer" — 100% CSS (gradientes + border-radius), sin imágenes -->
   <div class="hero-horizon absolute inset-0 pointer-events-none" aria-hidden="true">
-    <!-- Llamaradas: pulsos de gradiente sobre la cresta del arco. Duraciones
-         primas entre sí para que el ciclo combinado no se perciba como loop.
+    <!-- Llamaradas: lengüetas irregulares de luz que suben desde el arco.
+         Gradientes elípticos anclados a la base, scaleY con origin bottom
+         (crecen hacia arriba) + parpadeo no monótono. Duraciones y delays
+         distintos por lengüeta → fuego orgánico, nunca se percibe loop.
          Base opacity:0 → con prefers-reduced-motion quedan invisibles solas. -->
-    <div class="hero-flare hero-flare--a"></div>
-    <div class="hero-flare hero-flare--b"></div>
-    <div class="hero-flare hero-flare--c"></div>
-    <!-- Halos: anillos elípticos que se expanden desde la cresta. Pintados
-         antes del ::after (disco), así su mitad inferior queda ocluida y solo
-         se ve el arco superior emanando del sol. -->
-    <div class="hero-halo hero-halo--1"></div>
-    <div class="hero-halo hero-halo--2"></div>
+    <div class="hero-flame hero-flame--a"></div>
+    <div class="hero-flame hero-flame--b hero-flame--hot"></div>
+    <div class="hero-flame hero-flame--c"></div>
+    <div class="hero-flame hero-flame--d hero-flame--hot"></div>
+    <div class="hero-flame hero-flame--e"></div>
+    <div class="hero-flame hero-flame--f"></div>
+    <!-- Un único halo sutil y lento como acento secundario -->
+    <div class="hero-halo"></div>
   </div>
 
   <div class="max-w-4xl mx-auto text-center relative z-[1]">
@@ -112,33 +114,92 @@ import { siteConfig } from "@/config/site";
   }
 
   /* ===== Llamaradas ===== */
-  /* Blobs de gradiente anclados a la cresta. Solo animan transform/opacity
-     (compositor). Opacidad base 0: sin animación (reduced-motion) no existen
-     visualmente y el hero queda idéntico al estático actual. */
-  .hero-flare {
+  /* Lengüetas de luz irregulares que suben desde el arco. Cada una es un
+     gradiente elíptico anclado a su base; transform-origin bottom hace que
+     scaleY se lea como fuego creciendo hacia arriba. La asimetría viene de
+     un skew estático por lengüeta (--flame-skew) + anchos/alturas/tiempos
+     todos distintos. Solo transform/opacity (compositor). Opacidad base 0:
+     con reduced-motion no existen y el hero queda como el estático actual. */
+  .hero-flame {
+    --flame-skew: 0deg;
     position: absolute;
-    bottom: var(--horizon-visible);
-    aspect-ratio: 1.6;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 70%);
+    bottom: calc(var(--horizon-visible) - 1.5rem);
+    background: radial-gradient(
+      ellipse 50% 80% at 50% 100%,
+      var(--color-accent-glow-strong),
+      var(--color-accent-glow) 45%,
+      transparent 78%
+    );
     opacity: 0;
-    transform: translate(-50%, 50%);
+    transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(0.7);
+    transform-origin: 50% 100%;
   }
-  .hero-flare--a {
-    left: 32%;
-    width: clamp(10rem, 22vw, 18rem);
+  /* Núcleo más caliente: el mismo gradiente apilado dos veces, más angosto */
+  .hero-flame--hot {
+    background:
+      radial-gradient(
+        ellipse 28% 65% at 50% 100%,
+        var(--color-accent-glow-strong),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 50% 80% at 50% 100%,
+        var(--color-accent-glow-strong),
+        var(--color-accent-glow) 45%,
+        transparent 78%
+      );
   }
-  .hero-flare--b {
-    left: 50%;
-    width: clamp(14rem, 30vw, 26rem);
+  .hero-flame--a {
+    --flame-skew: -4deg;
+    left: 17%;
+    width: clamp(6rem, 12vw, 9.5rem);
+    height: clamp(8rem, 18vh, 13rem);
+    animation-duration: 4.2s;
+    animation-delay: -1.1s;
   }
-  .hero-flare--c {
-    left: 69%;
-    width: clamp(9rem, 18vw, 15rem);
+  .hero-flame--b {
+    --flame-skew: 3deg;
+    left: 31%;
+    width: clamp(4.5rem, 9vw, 7rem);
+    height: clamp(6rem, 14vh, 10rem);
+    animation-duration: 3.1s;
+    animation-delay: -2.3s;
+  }
+  .hero-flame--c {
+    --flame-skew: -2deg;
+    left: 46%;
+    width: clamp(7rem, 15vw, 12rem);
+    height: clamp(10rem, 24vh, 17rem);
+    animation-duration: 5.3s;
+    animation-delay: -0.6s;
+  }
+  .hero-flame--d {
+    --flame-skew: 5deg;
+    left: 59%;
+    width: clamp(5rem, 10vw, 8rem);
+    height: clamp(7rem, 16vh, 11.5rem);
+    animation-duration: 3.7s;
+    animation-delay: -2.9s;
+  }
+  .hero-flame--e {
+    --flame-skew: -5deg;
+    left: 72%;
+    width: clamp(6.5rem, 13vw, 10.5rem);
+    height: clamp(8.5rem, 20vh, 14rem);
+    animation-duration: 4.7s;
+    animation-delay: -1.8s;
+  }
+  .hero-flame--f {
+    --flame-skew: 2deg;
+    left: 85%;
+    width: clamp(4rem, 8vw, 6rem);
+    height: clamp(5rem, 12vh, 8.5rem);
+    animation-duration: 3.4s;
+    animation-delay: -0.4s;
   }
 
-  /* ===== Halos ===== */
-  /* Anillos elípticos centrados en la cresta; el disco (::after) pinta encima
+  /* ===== Halo (único, sutil) ===== */
+  /* Anillo elíptico centrado en la cresta; el disco (::after) pinta encima
      y ocluye su mitad inferior → solo el arco superior emana del sol. */
   .hero-halo {
     position: absolute;
@@ -160,24 +221,14 @@ import { siteConfig } from "@/config/site";
     .hero-horizon::before {
       animation: hero-bloom 9s ease-in-out infinite alternate;
     }
-    .hero-flare--a {
-      animation: hero-flare 7s ease-in-out infinite alternate;
-      animation-delay: -2s;
+    /* name/timing/iteration comunes; duración y delay los pone cada lengüeta */
+    .hero-flame {
+      animation-name: hero-flame;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
     }
-    .hero-flare--b {
-      animation: hero-flare 11s ease-in-out infinite alternate;
-      animation-delay: -5s;
-    }
-    .hero-flare--c {
-      animation: hero-flare 9s ease-in-out infinite alternate;
-      animation-delay: -8s;
-    }
-    .hero-halo--1 {
-      animation: hero-halo 9s ease-out infinite;
-    }
-    .hero-halo--2 {
-      animation: hero-halo 9s ease-out infinite;
-      animation-delay: -4.5s;
+    .hero-halo {
+      animation: hero-halo 13s ease-out infinite;
     }
   }
 
@@ -192,14 +243,34 @@ import { siteConfig } from "@/config/site";
     }
   }
 
-  @keyframes hero-flare {
-    from {
-      opacity: 0.1;
-      transform: translate(-50%, 50%) scale(0.92);
+  /* Parpadeo no monótono + crecimiento vertical: la curva de opacidad sube y
+     baja de forma asimétrica (como fuego), scaleY estira la lengüeta hacia
+     arriba y scaleX la afina cuando está más alta. --flame-skew se resuelve
+     por elemento, así un solo keyframes sirve para las seis. */
+  @keyframes hero-flame {
+    0% {
+      opacity: 0.12;
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(0.7) scaleX(1);
     }
-    to {
+    22% {
       opacity: 0.55;
-      transform: translate(-50%, 50%) scale(1.12);
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(1.08) scaleX(0.93);
+    }
+    38% {
+      opacity: 0.3;
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(0.88) scaleX(0.98);
+    }
+    61% {
+      opacity: 0.68;
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(1.2) scaleX(0.88);
+    }
+    79% {
+      opacity: 0.35;
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(0.92) scaleX(0.97);
+    }
+    100% {
+      opacity: 0.12;
+      transform: translateX(-50%) skewX(var(--flame-skew)) scaleY(0.7) scaleX(1);
     }
   }
 
@@ -209,7 +280,7 @@ import { siteConfig } from "@/config/site";
       transform: translate(-50%, 50%) scale(0.25);
     }
     14% {
-      opacity: 0.35;
+      opacity: 0.2;
     }
     100% {
       opacity: 0;
