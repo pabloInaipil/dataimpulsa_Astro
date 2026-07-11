@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description = "Sitios web de alto rendimiento, dashboards Power BI y automatización de procesos para PYMEs en Chile. Landing pages listas en 10 días.",
-  ogImage = "/og-image.png",
+  ogImage = "/og-image.jpg",
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
@@ -26,7 +26,6 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:image" content="https://dataimpulsa.cl/og-image.jpg" />
 
     <!-- SEO -->
     <title>{fullTitle}</title>
@@ -51,13 +50,9 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts (self-hosted) -->
+    <link rel="preload" href="/fonts/outfit-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono-variable-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
