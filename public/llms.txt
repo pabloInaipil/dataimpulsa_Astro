@@ -1,0 +1,34 @@
+# DatAImpulsa
+
+> Agencia chilena de desarrollo web y datos/IA para PYMEs y sector público.
+> Construimos sitios web ultrarrápidos con Astro (PageSpeed 95+) y soluciones
+> de datos: automatización de procesos, web scraping y dashboards Power BI.
+
+DatAImpulsa opera desde Santiago de Chile (Ahumada 236 Of. 501). Dos líneas de
+servicio: desarrollo web de alto rendimiento (~70%) y business intelligence /
+automatización con IA (~30%). Contacto: contacto@dataimpulsa.cl.
+
+## Servicios
+
+- [Desarrollo web con Astro](https://dataimpulsa.cl/#servicios): sitios ultra
+  rápidos, SEO nativo, arquitectura Jamstack, 100% a medida.
+- [Datos e IA](https://dataimpulsa.cl/#datos): automatización de procesos,
+  web scraping y dashboards Power BI.
+- [Tecnologías](https://dataimpulsa.cl/#tecnologia): stack moderno (Astro,
+  Tailwind, Cloudflare, Power BI).
+
+## Casos de éxito
+
+- [Casos de éxito](https://dataimpulsa.cl/#casos): TodoCasa Construcciones,
+  Ravacor Servicios SpA y Art-Rochelo, con métricas de PageSpeed y conversión.
+- [Portafolio completo](https://dataimpulsa.cl/portafolio)
+
+## Empresa
+
+- [Nosotros](https://dataimpulsa.cl/nosotros): equipo y enfoque de trabajo.
+- [Blog](https://dataimpulsa.cl/blog): artículos sobre rendimiento web y datos.
+
+## Contacto
+
+- [Agendar reunión](https://dataimpulsa.cl/#contacto): formulario de contacto
+  para cotizaciones y diagnósticos.
