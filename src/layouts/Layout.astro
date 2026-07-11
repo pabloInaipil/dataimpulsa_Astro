@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description = "Sitios web de alto rendimiento, dashboards Power BI y automatización de procesos para PYMEs en Chile. Landing pages listas en 10 días.",
-  ogImage = "/og-image.png",
+  ogImage = "/og-image.jpg",
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
@@ -26,7 +26,6 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:image" content="https://dataimpulsa.cl/og-image.jpg" />
 
     <!-- SEO -->
     <title>{fullTitle}</title>

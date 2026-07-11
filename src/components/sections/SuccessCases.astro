@@ -4,7 +4,9 @@
 const cases = [
   {
     name: "TodoCasa Construcciones",
-    image: "/todocasathumb.png",
+    image: "/todocasathumb.webp",
+    width: 800,
+    height: 399,
     alt: "Sitio web de TodoCasa Construcciones",
     metrics: [
       { value: "98", label: "PageSpeed" },
@@ -14,7 +16,9 @@ const cases = [
   },
   {
     name: "Ravacor Servicios SpA",
-    image: "/ravacorthumb.png",
+    image: "/ravacorthumb.webp",
+    width: 800,
+    height: 424,
     alt: "Sitio web de Ravacor Servicios SpA",
     metrics: [
       { value: "99", label: "PageSpeed" },
@@ -24,7 +28,9 @@ const cases = [
   },
   {
     name: "Art-Rochelo",
-    image: "/art-rochelothumb.png",
+    image: "/art-rochelothumb.webp",
+    width: 800,
+    height: 442,
     alt: "Sitio web de Art-Rochelo",
     metrics: [
       { value: "97", label: "PageSpeed" },
@@ -69,8 +75,8 @@ const cases = [
             <img
               src={c.image}
               alt={c.alt}
-              width="640"
-              height="400"
+              width={c.width}
+              height={c.height}
               loading="lazy"
               decoding="async"
               class="w-full aspect-[16/10] object-cover object-top rounded-lg"
