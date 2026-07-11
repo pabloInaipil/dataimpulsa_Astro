@@ -4,9 +4,8 @@ import { siteConfig } from "@/config/site";
 ---
 
 <section class="relative min-h-screen flex items-center justify-center pt-36 pb-20 px-6 overflow-hidden">
-  <!-- Glow effects (background-image por CSS, sin <img>) -->
-  <div class="hero-glow-main absolute -top-[250px] left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"></div>
-  <div class="hero-glow-side absolute -bottom-[150px] -left-[200px] w-[500px] h-[500px] pointer-events-none"></div>
+  <!-- Horizonte curvo "amanecer" — 100% CSS (gradientes + border-radius), sin imágenes -->
+  <div class="hero-horizon absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
   <div class="max-w-4xl mx-auto text-center relative z-[1]">
     <!-- Badge -->
@@ -43,22 +42,48 @@ import { siteConfig } from "@/config/site";
 </section>
 
 <style>
-  .hero-glow-main {
-    background-image: radial-gradient(
-      circle,
-      var(--color-accent-glow-strong) 0%,
-      transparent 70%
-    );
-    animation: pulse-glow 8s ease-in-out infinite;
+  .hero-horizon {
+    /* Únicos knobs de ajuste: tamaño del disco y cuánto arco asoma */
+    --horizon-size: max(200vw, 48rem);
+    --horizon-visible: clamp(64px, 10vh, 170px);
   }
 
-  .hero-glow-side {
-    background-image: radial-gradient(
-      circle,
-      var(--color-accent-glow) 0%,
-      transparent 70%
-    );
-    animation: pulse-glow 10s ease-in-out infinite reverse;
+  /* Atmósfera: bloom que sube desde el horizonte.
+     Dos capas del mismo gradiente tokenizado apiladas = núcleo más cálido
+     sin introducir colores nuevos. */
+  .hero-horizon::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: var(--horizon-visible);
+    width: max(120vw, 56rem);
+    height: clamp(20rem, 46vh, 34rem);
+    transform: translate(-50%, 50%);
+    background:
+      radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 72%),
+      radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 45%);
+  }
+
+  /* Disco "planeta": solo asoma el arco superior (border-radius 50% sobre un
+     círculo de ~200vw). El relleno opaco ocluye el bloom bajo la línea del
+     horizonte y funde a --color-deep hacia la sección siguiente. */
+  .hero-horizon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: var(--horizon-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, calc(100% - var(--horizon-visible)));
+    background:
+      radial-gradient(closest-side, transparent 88%, var(--color-accent-glow) 98%, var(--color-accent-glow-strong) 100%),
+      var(--color-deep);
+    border: 1px solid var(--color-accent);
+    box-shadow:
+      0 0 40px var(--color-accent-glow-strong),
+      0 0 140px 40px var(--color-accent-glow),
+      inset 0 0 80px var(--color-accent-glow);
   }
 
   .badge-dot {
