@@ -1,10 +1,12 @@
 ---
 // src/components/sections/Areas.astro
+import { Icon } from "astro-icon/components";
+
 const areas = [
-  { icon: "👥", name: "R.R.H.H." },
-  { icon: "💰", name: "Finanzas" },
-  { icon: "🏛️", name: "Gobierno" },
-  { icon: "🏗️", name: "Operaciones" },
+  { icon: "lucide:users", name: "R.R.H.H." },
+  { icon: "lucide:wallet", name: "Finanzas" },
+  { icon: "lucide:landmark", name: "Gobierno" },
+  { icon: "lucide:hard-hat", name: "Operaciones" },
 ];
 ---
 
@@ -31,7 +33,7 @@ const areas = [
             `reveal-delay-${i + 1}`,
           ]}
         >
-          <div class="text-3xl mb-4">{area.icon}</div>
+          <Icon name={area.icon} class="w-8 h-8 mx-auto mb-4 text-accent" aria-hidden="true" />
           <h4 class="text-sm font-semibold">{area.name}</h4>
         </div>
       ))}

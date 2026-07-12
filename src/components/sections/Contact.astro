@@ -1,5 +1,6 @@
 ---
 // src/components/sections/Contact.astro
+import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config/site";
 
 const inputClasses =
@@ -33,22 +34,22 @@ const inputClasses =
 
         <div class="space-y-4">
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-(--color-border-accent) bg-accent/10">
-              ✉
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-(--color-border-accent) bg-accent/10 text-accent">
+              <Icon name="lucide:mail" class="w-4 h-4" aria-hidden="true" />
             </div>
             <span class="text-(--color-text-secondary)">{siteConfig.email}</span>
           </div>
 
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-(--color-border-accent) bg-accent/10">
-              📱
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-(--color-border-accent) bg-accent/10 text-accent">
+              <Icon name="lucide:smartphone" class="w-4 h-4" aria-hidden="true" />
             </div>
             <span class="text-(--color-text-secondary)">{siteConfig.phone}</span>
           </div>
 
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base shrink-0 border border-(--color-border-accent) bg-accent/10">
-              📍
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-(--color-border-accent) bg-accent/10 text-accent">
+              <Icon name="lucide:map-pin" class="w-4 h-4" aria-hidden="true" />
             </div>
             <span class="text-(--color-text-secondary)">{siteConfig.address}</span>
           </div>
