@@ -7,6 +7,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -14,6 +15,7 @@ const {
   description = "Sitios web de alto rendimiento, dashboards Power BI y automatización de procesos para PYMEs en Chile. Landing pages listas en 10 días.",
   ogImage = "/og-image.jpg",
   canonicalURL = Astro.url.href,
+  noindex = false,
 } = Astro.props;
 
 const siteName = "DatAImpulsa";
@@ -30,6 +32,7 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     <!-- SEO -->
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->

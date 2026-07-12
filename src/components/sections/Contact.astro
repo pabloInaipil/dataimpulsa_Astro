@@ -64,6 +64,14 @@ const inputClasses =
         <input type="hidden" name="access_key" value={siteConfig.web3formsKey} />
         <input type="hidden" name="subject" value="Nuevo contacto desde dataimpulsa.cl" />
         <input type="hidden" name="from_name" value="DatAImpulsa Web" />
+        <!-- Web3Forms exige URL absoluta; el script la ajusta a location.origin
+             para que el redirect también funcione en previews .pages.dev -->
+        <input type="hidden" name="redirect" value="https://dataimpulsa.cl/gracias/" data-redirect />
+        <script>
+          document
+            .querySelector<HTMLInputElement>("[data-redirect]")
+            ?.setAttribute("value", `${location.origin}/gracias/`);
+        </script>
         <input type="checkbox" name="botcheck" class="hidden" />
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
