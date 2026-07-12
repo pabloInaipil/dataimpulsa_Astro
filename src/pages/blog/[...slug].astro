@@ -33,7 +33,6 @@ const { Content } = await render(post);
             <time
               datetime={post.data.pubDate.toISOString()}
               class="text-xs text-(--color-text-muted)"
-              style="font-family: var(--font-mono);"
             >
               {post.data.pubDate.toLocaleDateString("es-CL", {
                 year: "numeric",
@@ -44,7 +43,7 @@ const { Content } = await render(post);
             <span class="text-xs text-(--color-text-muted)">·</span>
             <span class="text-xs text-(--color-text-muted)">{post.data.author}</span>
           </div>
-          <h1 class="text-[clamp(2rem,4vw,3rem)] font-extrabold leading-tight tracking-tight mb-4">
+          <h1 class="text-[clamp(2rem,4vw,3rem)] font-bold leading-tight tracking-tight mb-4">
             {post.data.title}
           </h1>
           <div class="flex flex-wrap gap-2">

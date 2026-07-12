@@ -15,14 +15,14 @@ const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"];
 
     <!-- Card 1: Rendimiento promedio -->
     <div class="bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-7 reveal reveal-delay-1">
-      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-(--color-text-muted) mb-5">
+      <div class="text-[0.65rem] font-display tracking-widest uppercase text-(--color-text-muted) mb-5">
         Rendimiento promedio
       </div>
       <div class="flex items-center justify-between gap-4">
         <div>
           <div class="flex items-baseline gap-1">
-            <span class="text-5xl font-extrabold font-mono">98</span>
-            <span class="text-xl font-semibold text-(--color-text-muted) font-mono">/100</span>
+            <span class="text-5xl font-bold font-display">98</span>
+            <span class="text-xl font-semibold text-(--color-text-muted) font-display">/100</span>
           </div>
           <div class="text-sm text-(--color-text-muted) mt-2">Google PageSpeed</div>
         </div>
@@ -34,12 +34,12 @@ const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"];
 
     <!-- Card 2: Tiempo de carga -->
     <div class="bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-7 reveal reveal-delay-2">
-      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-(--color-text-muted) mb-5">
+      <div class="text-[0.65rem] font-display tracking-widest uppercase text-(--color-text-muted) mb-5">
         Tiempo de carga
       </div>
       <div class="flex items-center gap-3 mb-4">
-        <span class="text-4xl font-extrabold font-mono">0.6s</span>
-        <span class="text-[0.65rem] font-mono font-semibold px-2.5 py-1 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
+        <span class="text-4xl font-bold font-display">0.6s</span>
+        <span class="text-[0.65rem] font-display font-semibold px-2.5 py-1 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
           ULTRA RÁPIDO
         </span>
       </div>
@@ -56,22 +56,22 @@ const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul"];
           <circle class="spark-dot" cx={20 + i * 40} cy={y} r="3"></circle>
         ))}
       </svg>
-      <div class="flex justify-between text-[0.6rem] font-mono text-(--color-text-muted) mt-1 px-1">
+      <div class="flex justify-between text-[0.6rem] font-display text-(--color-text-muted) mt-1 px-1">
         {months.map((m) => <span>{m}</span>)}
       </div>
     </div>
 
     <!-- Card 3: Core Web Vitals -->
     <div class="bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-7 reveal reveal-delay-3">
-      <div class="text-[0.65rem] font-mono tracking-widest uppercase text-(--color-text-muted) mb-5">
+      <div class="text-[0.65rem] font-display tracking-widest uppercase text-(--color-text-muted) mb-5">
         Core Web Vitals
       </div>
       <ul class="flex flex-col gap-4 list-none">
         {vitals.map((v) => (
           <li class="flex items-center justify-between gap-3">
-            <span class="text-sm font-mono font-semibold text-(--color-text-secondary)">{v.name}</span>
-            <span class="text-sm font-mono font-bold ml-auto">{v.value}</span>
-            <span class="text-[0.6rem] font-mono px-2 py-0.5 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
+            <span class="text-sm font-display font-semibold text-(--color-text-secondary)">{v.name}</span>
+            <span class="text-sm font-display font-bold ml-auto">{v.value}</span>
+            <span class="text-[0.6rem] font-display px-2 py-0.5 rounded-full text-green-500 bg-green-500/10 border border-green-500/20">
               Excelente
             </span>
           </li>

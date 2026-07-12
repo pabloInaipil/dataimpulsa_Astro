@@ -23,10 +23,10 @@ const posts = (await getCollection("blog"))
         style="background: radial-gradient(circle, var(--color-violet-glow-strong) 0%, transparent 70%); animation: pulse-glow 8s ease-in-out infinite;"
       ></div>
       <div class="max-w-7xl mx-auto text-center">
-        <div class="text-xs font-medium tracking-widest uppercase text-(--color-purple-400) mb-3" style="font-family: var(--font-mono);">
+        <div class="text-xs font-medium tracking-widest uppercase text-(--color-purple-400) mb-3 font-display">
           // Blog
         </div>
-        <h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold leading-tight tracking-tight mb-6">
+        <h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-bold leading-tight tracking-tight mb-6">
           Insights sobre <span class="gradient-text">datos y BI</span>
         </h1>
         <p class="text-lg text-(--color-text-secondary) max-w-2xl mx-auto leading-relaxed">
@@ -59,7 +59,6 @@ const posts = (await getCollection("blog"))
                   <time
                     datetime={post.data.pubDate.toISOString()}
                     class="text-xs text-(--color-text-muted)"
-                    style="font-family: var(--font-mono);"
                   >
                     {post.data.pubDate.toLocaleDateString("es-CL", {
                       year: "numeric",
