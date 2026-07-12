@@ -1,5 +1,6 @@
 ---
 // src/components/layout/Navbar.astro
+import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config/site";
 
 interface Props {
@@ -59,8 +60,12 @@ const navLinks = siteConfig.nav;
         class="w-9 h-9 rounded-lg flex items-center justify-center border border-(--color-border-subtle) bg-transparent cursor-pointer transition-all duration-300 hover:border-(--color-border-accent) text-(--color-text-secondary) hover:text-accent"
         aria-label="Cambiar tema"
       >
-        <span id="icon-dark" class="text-sm hidden">🌙</span>
-        <span id="icon-light" class="text-sm hidden">☀️</span>
+        <span id="icon-dark" class="hidden">
+          <Icon name="lucide:moon" class="w-4 h-4 block" aria-hidden="true" />
+        </span>
+        <span id="icon-light" class="hidden">
+          <Icon name="lucide:sun" class="w-4 h-4 block" aria-hidden="true" />
+        </span>
       </button>
 
       <!-- Mobile Hamburger: solo en móvil -->

@@ -1,5 +1,6 @@
 ---
 // src/components/sections/Testimonials.astro
+import { Icon } from "astro-icon/components";
 
 interface Testimonial {
   name: string;
@@ -92,7 +93,7 @@ const totalSlides = testimonials.length;
                   class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-(--color-border-accent)"
                   style="background: rgba(17, 17, 40, 0.85); backdrop-filter: blur(8px);"
                 >
-                  <span class="text-amber-400">★</span>
+                  <Icon name="lucide:star" class="w-3.5 h-3.5 text-amber-400 fill-current" aria-hidden="true" />
                   <span class="text-(--color-text-primary)">{t.rating.toFixed(1)}</span>
                 </div>
               </div>

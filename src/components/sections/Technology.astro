@@ -1,6 +1,8 @@
 ---
 // src/components/sections/Technology.astro
 // "Astro: el futuro del desarrollo web" — texto + diagrama orbital animado en CSS.
+import { Icon } from "astro-icon/components";
+
 const bullets = [
   "Súper rápido por defecto",
   "SEO perfecto y accesibilidad",
@@ -11,10 +13,10 @@ const bullets = [
 // Cada badge orbita el anillo punteado: ángulo inicial y velocidad propios
 // (definidos en las clases .orbit-* del <style> scoped).
 const orbitBadges = [
-  { symbol: "⚛", label: "React", orbit: "orbit-react" },
-  { symbol: "V", label: "Vue", orbit: "orbit-vue" },
-  { symbol: "S", label: "Svelte", orbit: "orbit-svelte" },
-  { symbol: "~", label: "Tailwind CSS", orbit: "orbit-tailwind" },
+  { icon: "simple-icons:react", label: "React", orbit: "orbit-react" },
+  { icon: "simple-icons:vuedotjs", label: "Vue", orbit: "orbit-vue" },
+  { icon: "simple-icons:svelte", label: "Svelte", orbit: "orbit-svelte" },
+  { icon: "simple-icons:tailwindcss", label: "Tailwind CSS", orbit: "orbit-tailwind" },
 ];
 ---
 
@@ -37,7 +39,9 @@ const orbitBadges = [
       <ul class="flex flex-col gap-3 mb-10 list-none">
         {bullets.map((b) => (
           <li class="flex items-center gap-3">
-            <span class="w-5 h-5 rounded-full grid place-items-center shrink-0 bg-accent/15 text-accent text-xs font-bold">✓</span>
+            <span class="w-5 h-5 rounded-full grid place-items-center shrink-0 bg-accent/15 text-accent">
+              <Icon name="lucide:check" class="w-3 h-3" aria-hidden="true" />
+            </span>
             <span class="text-sm text-(--color-text-secondary)">{b}</span>
           </li>
         ))}
@@ -62,7 +66,7 @@ const orbitBadges = [
       <!-- Centro: wordmark con float sutil -->
       <div class="absolute inset-0 grid place-items-center">
         <div class="text-center float-center">
-          <div class="text-6xl mb-2">🚀</div>
+          <Icon name="lucide:rocket" class="w-14 h-14 mx-auto mb-3 text-accent" aria-hidden="true" />
           <div class="text-4xl font-extrabold tracking-tight gradient-text">astro</div>
         </div>
       </div>
@@ -73,10 +77,10 @@ const orbitBadges = [
       {orbitBadges.map((b) => (
         <div class:list={["orbit-arm absolute inset-[6%] pointer-events-none", b.orbit]}>
           <span
-            class="orbit-badge absolute top-1/2 left-full -m-6 w-12 h-12 rounded-full grid place-items-center text-lg font-bold bg-(--color-card) border border-(--color-border-subtle) text-(--color-text-secondary) shadow-[0_10px_30px_rgba(0,0,0,0.4)] pointer-events-auto"
+            class="orbit-badge absolute top-1/2 left-full -m-6 w-12 h-12 rounded-full grid place-items-center bg-(--color-card) border border-(--color-border-subtle) text-(--color-text-secondary) shadow-[0_10px_30px_rgba(0,0,0,0.4)] pointer-events-auto"
             title={b.label}
           >
-            {b.symbol}
+            <Icon name={b.icon} class="w-5 h-5" aria-label={b.label} />
           </span>
         </div>
       ))}
