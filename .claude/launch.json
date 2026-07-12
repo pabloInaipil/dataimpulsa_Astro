@@ -8,6 +8,12 @@
       "port": 4399
     },
     {
+      "name": "astro-dev-alt",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "4401"],
+      "port": 4401
+    },
+    {
       "name": "astro-preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4400"],

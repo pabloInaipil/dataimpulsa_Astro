@@ -14,6 +14,21 @@ Power BI (~30%).
 - **Formularios:** Web3Forms (key en `src/config/site.ts` → `web3formsKey`).
 - Blog en `src/content/` (content collections, config en `src/content.config.ts`).
 
+## Formularios y conversión (Web3Forms + GTM)
+
+- **POST nativo, NUNCA AJAX/fetch**: el submit AJAX rompe el trigger de
+  conversión en GTM (la conversión depende del pageview de `/gracias/`).
+- Campo oculto `redirect` → `/gracias/`. Web3Forms exige URL absoluta; el valor
+  estático apunta a producción y un script lo ajusta a `location.origin` para
+  que funcione también en previews `.pages.dev`.
+- La página `/gracias/` (con `noindex`) es la ÚNICA que dispara el evento
+  `form_conversion` en `dataLayer` (Custom Event para GTM, no triggers
+  nativos). El form NO dispara eventos por sí mismo.
+- GTM aún NO tiene contenedor instalado en el Layout; el push a `dataLayer`
+  queda preparado para cuando se agregue.
+- Incluir siempre `<input type="hidden" name="subject" value="...">`.
+- **NO usar `ccemail`**: no funciona en el plan free de Web3Forms.
+
 ## Reglas de código
 
 - **Cero inline styles** (`style="..."`). Usar utilidades Tailwind o `<style>`
