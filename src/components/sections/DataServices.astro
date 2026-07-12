@@ -52,7 +52,7 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
     <!-- Header -->
     <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 reveal">
       <div>
-        <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
+        <div class="text-xs font-display font-medium tracking-widest uppercase text-accent-light mb-3">
           // Datos & IA
         </div>
         <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight leading-tight max-w-2xl">
@@ -99,7 +99,7 @@ const cards = data.items.map((item, i) => ({ ...item, ...cardExtras[i] }));
               <h3 class="text-xl font-semibold mb-3">{card.title}</h3>
               <p class="text-(--color-text-secondary) leading-relaxed">{card.description}</p>
               <div class="mt-auto pt-5">
-                <div class="border-t border-(--color-border-subtle) pt-4 text-[0.6rem] font-mono tracking-widest text-(--color-text-muted)">
+                <div class="border-t border-(--color-border-subtle) pt-4 text-[0.6rem] font-display tracking-widest text-(--color-text-muted)">
                   {card.tag}
                 </div>
               </div>

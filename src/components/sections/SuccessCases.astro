@@ -45,7 +45,7 @@ const cases = [
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16 reveal">
-      <div class="text-xs font-mono font-medium tracking-widest uppercase text-accent-light mb-3">
+      <div class="text-xs font-display font-medium tracking-widest uppercase text-accent-light mb-3">
         // Casos de éxito
       </div>
       <h2 class="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tight">
@@ -88,7 +88,7 @@ const cases = [
           <div class="grid grid-cols-3 gap-2">
             {c.metrics.map((m) => (
               <div class="text-center">
-                <div class:list={["text-lg font-bold font-mono", m.highlight ? "text-accent-light" : ""]}>
+                <div class:list={["text-lg font-bold font-display", m.highlight ? "text-accent-light" : ""]}>
                   {m.value}
                 </div>
                 <div class="text-[0.65rem] text-(--color-text-muted) leading-tight mt-1">{m.label}</div>
