@@ -61,6 +61,9 @@ html.light .light\:hidden { display: none !important; }
   --color-border-subtle: rgba(255, 255, 255, 0.06);
   --color-border-accent: rgba(249, 115, 22, 0.25);
 
+  /* Space Grotesk luce mejor con tracking mas apretado en titulares grandes */
+  --tracking-tight: -0.03em;
+
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas,
@@ -108,7 +111,20 @@ h5,
 h6 {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em;
+}
+
+/* Tracking escalonado: mas negativo cuanto mas grande el titular */
+h1 {
+  letter-spacing: -0.03em;
+}
+h2 {
+  letter-spacing: -0.022em;
+}
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.015em;
 }
 
 /* ===== NOISE OVERLAY ===== */
