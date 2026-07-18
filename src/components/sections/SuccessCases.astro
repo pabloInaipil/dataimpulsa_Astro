@@ -1,6 +1,11 @@
 ---
 // src/components/sections/SuccessCases.astro
-// Casos de éxito con métricas de rendimiento (thumbnail real dentro de mock de navegador).
+// Casos de éxito en carrusel auto-rotatorio (thumbnail real dentro de mock de navegador).
+//
+// MÉTRICAS: ocultas de forma reversible. Poné SHOW_METRICS = true para reactivarlas.
+// Los datos de métricas de los 3 primeros casos quedan intactos; solo no se renderizan.
+const SHOW_METRICS = false;
+
 const cases = [
   {
     name: "TodoCasa Construcciones",
@@ -38,6 +43,41 @@ const cases = [
       { value: "+65%", label: "Ventas", highlight: true },
     ],
   },
+  {
+    name: "Innovatar",
+    image: "/innovatarthumb.webp",
+    width: 800,
+    height: 400,
+    alt: "Sitio web de Innovatar",
+  },
+  {
+    name: "RHINO SpA",
+    image: "/rhinothumb.webp",
+    width: 800,
+    height: 418,
+    alt: "Sitio web de RHINO SpA",
+  },
+  {
+    name: "RoberTours",
+    image: "/robertoursthumb.webp",
+    width: 800,
+    height: 401,
+    alt: "Sitio web de RoberTours",
+  },
+  {
+    name: "Transportes Dial",
+    image: "/transportesdialthumb.webp",
+    width: 800,
+    height: 403,
+    alt: "Sitio web de Transportes Dial",
+  },
+];
+
+// Duplicamos el set para el loop infinito. La copia va aria-hidden (crawlers y
+// lectores de pantalla ignoran los duplicados; los 7 originales quedan indexables).
+const track = [
+  ...cases.map((c) => ({ ...c, clone: false })),
+  ...cases.map((c) => ({ ...c, clone: true })),
 ];
 ---
 
@@ -53,50 +93,61 @@ const cases = [
       </h2>
     </div>
 
-    <!-- Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      {cases.map((c, i) => (
-        <div
-          class:list={[
-            "group bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-6 transition-all duration-400",
-            "hover:border-(--color-border-accent) hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-accent-glow)]",
-            "reveal",
-            `reveal-delay-${i + 1}`,
-          ]}
-        >
-          <!-- Mock de navegador -->
-          <div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-xl p-4 mb-6">
-            <div class="flex items-center gap-1.5 mb-3">
-              <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
-              <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
-              <span class="w-2 h-2 rounded-full bg-green-500/60"></span>
-              <span class="flex-1 h-2 bg-(--color-card-hover) rounded ml-2"></span>
-            </div>
-            <img
-              src={c.image}
-              alt={c.alt}
-              width={c.width}
-              height={c.height}
-              loading="lazy"
-              decoding="async"
-              class="w-full aspect-[16/10] object-cover object-top rounded-lg"
-            />
-          </div>
-
-          <h3 class="text-base font-semibold mb-5">{c.name}</h3>
-
-          <div class="grid grid-cols-3 gap-2">
-            {c.metrics.map((m) => (
-              <div class="text-center">
-                <div class:list={["text-lg font-bold font-display", m.highlight ? "text-accent-light" : ""]}>
-                  {m.value}
-                </div>
-                <div class="text-[0.65rem] text-(--color-text-muted) leading-tight mt-1">{m.label}</div>
+    <!-- Carrusel -->
+    <div
+      class="di-carousel reveal mb-12"
+      data-di-carousel
+      role="region"
+      aria-label="Casos de éxito"
+      aria-roledescription="carrusel"
+    >
+      <div class="di-track" data-di-track tabindex="0">
+        {track.map((c) => (
+          <div
+            class:list={[
+              "di-card group bg-(--color-card) border border-(--color-border-subtle) rounded-2xl p-6 transition-all duration-400",
+              "hover:border-(--color-border-accent) hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_30px_var(--color-accent-glow)]",
+            ]}
+            role="group"
+            aria-label={c.name}
+            aria-hidden={c.clone ? "true" : undefined}
+          >
+            <!-- Mock de navegador -->
+            <div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-xl p-4 mb-6">
+              <div class="flex items-center gap-1.5 mb-3">
+                <span class="w-2 h-2 rounded-full bg-red-500/60"></span>
+                <span class="w-2 h-2 rounded-full bg-yellow-500/60"></span>
+                <span class="w-2 h-2 rounded-full bg-green-500/60"></span>
+                <span class="flex-1 h-2 bg-(--color-card-hover) rounded ml-2"></span>
               </div>
-            ))}
+              <img
+                src={c.image}
+                alt={c.alt}
+                width={c.width}
+                height={c.height}
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[16/10] object-cover object-top rounded-lg"
+              />
+            </div>
+
+            <h3 class:list={["text-base font-semibold", SHOW_METRICS ? "mb-5" : "mb-0"]}>{c.name}</h3>
+
+            {SHOW_METRICS && c.metrics?.length && (
+              <div class="grid grid-cols-3 gap-2">
+                {c.metrics.map((m) => (
+                  <div class="text-center">
+                    <div class:list={["text-lg font-bold font-display", m.highlight ? "text-accent-light" : ""]}>
+                      {m.value}
+                    </div>
+                    <div class="text-[0.65rem] text-(--color-text-muted) leading-tight mt-1">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
 
     <!-- CTA -->
@@ -110,3 +161,101 @@ const cases = [
     </div>
   </div>
 </section>
+
+<style>
+  .di-track {
+    display: flex;
+    gap: 1.5rem; /* == gap-6 */
+    overflow-x: auto;
+    /* room para el hover-lift y el glow sin recorte vertical brusco */
+    padding: 0.75rem 0.25rem 1.5rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .di-track::-webkit-scrollbar {
+    display: none;
+  }
+  .di-track:focus-visible {
+    outline: 2px solid var(--color-border-accent);
+    outline-offset: 4px;
+    border-radius: 1rem;
+  }
+  .di-card {
+    flex: 0 0 80%; /* mobile: ~1.2 visibles (se asoma el siguiente) */
+    scroll-snap-align: start;
+  }
+  @media (min-width: 640px) {
+    .di-card {
+      flex-basis: 46%; /* tablet: ~2 visibles */
+    }
+  }
+  @media (min-width: 1024px) {
+    .di-card {
+      flex-basis: 31%; /* desktop: ~3 visibles + asomo */
+    }
+  }
+  /* Sin auto-rotación si el usuario pidió menos movimiento: queda estático y
+     scrolleable a mano (el JS también respeta esto y no arranca el rAF). */
+  @media (prefers-reduced-motion: reduce) {
+    .di-track {
+      scroll-snap-type: x mandatory;
+    }
+  }
+</style>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>("[data-di-carousel]");
+
+  carousels.forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-di-track]");
+    if (!track) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return; // estático: solo scroll manual, sin auto-rotación
+
+    let half = track.scrollWidth / 2; // ancho de un set (hay 2 sets duplicados)
+    const measure = () => {
+      half = track.scrollWidth / 2;
+    };
+    window.addEventListener("resize", measure);
+
+    const SPEED = 0.5; // px por frame (~30px/s, lento y continuo)
+    let paused = false;
+    let rafId: number | null = null;
+
+    const step = () => {
+      if (!paused) {
+        track.scrollLeft += SPEED;
+        if (track.scrollLeft >= half) track.scrollLeft -= half; // loop invisible
+      }
+      rafId = requestAnimationFrame(step);
+    };
+    const start = () => {
+      if (rafId == null) rafId = requestAnimationFrame(step);
+    };
+    const stop = () => {
+      if (rafId != null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    // Pausa en hover, foco de teclado y mientras el usuario arrastra.
+    ["mouseenter", "focusin", "pointerdown", "touchstart"].forEach((e) =>
+      root.addEventListener(e, () => (paused = true)),
+    );
+    ["mouseleave", "focusout", "pointerup", "touchend"].forEach((e) =>
+      root.addEventListener(e, () => (paused = false)),
+    );
+
+    // Solo corre cuando la sección está en viewport (0 CPU en scroll largo).
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => (en.isIntersecting ? start() : stop()));
+      },
+      { threshold: 0 },
+    );
+    io.observe(root);
+  });
+</script>
