@@ -4,14 +4,31 @@ import Layout from "@layouts/Layout.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import Footer from "@components/layout/Footer.astro";
 import Contact from "@components/sections/Contact.astro";
+import { Icon } from "astro-icon/components";
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  gif?: string;
+  video?: { id: string; thumb: string };
+};
+
+const projects: Project[] = [
   {
     title: "Dashboard interactivo que analiza el comportamiento de las compras públicas realizadas por organismos del Estado de Chile durante el año 2024",
     category: "Tecnología",
     gif: "/1.gif",
     description: "Dashboard interactivo que analiza el comportamiento de las compras públicas realizadas por organismos del Estado de Chile durante el año 2024. Este informe permite visualizar el gasto total, identificar a los principales compradores, proveedores y rubros, y segmentar por región, sector y período, facilitando una toma de decisiones transparente, estratégica y basada en datos.",
     tags: ["Power BI", "SQL", "RPA"],
+  },
+  {
+    title: "Descarga desatendida de 17 reportes de ejecución presupuestaria en SIGFE con Power Automate",
+    category: "Automatización",
+    video: { id: "13tlyOPiCrg", thumb: "/sigfethumb.webp" },
+    description: "Implementación de un flujo de automatización robótica en producción mediante Power Automate, que realiza la descarga desatendida de 17 reportes críticos de ejecución presupuestaria en SIGFE, eliminando la extracción manual.",
+    tags: ["Power Automate", "RPA", "SIGFE"],
   },
   {
     title: "Creación de dashboard para la unidad de Recursos Humanos de la empresa de Seguridad Privada Asesorias AGR SpA",
@@ -66,7 +83,37 @@ const projects = [
               class="w-full aspect-video flex items-center justify-center text-6xl text-(--color-text-muted) relative"
               style="background: linear-gradient(135deg, #0f0f2e, #1a1a4e);"
             >
-              <img src={project.gif}>
+              {project.video ? (
+                <div
+                  class="video-facade absolute inset-0"
+                  data-video-id={project.video.id}
+                  data-video-title={project.title}
+                >
+                  <img
+                    src={project.video.thumb}
+                    alt=""
+                    width="1280"
+                    height="720"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover"
+                  />
+                  <button
+                    type="button"
+                    class="group/play absolute inset-0 grid place-items-center cursor-pointer focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-(--color-accent)"
+                    aria-label="Reproducir video: automatización SIGFE con Power Automate"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="grid place-items-center w-16 h-16 rounded-full bg-accent text-white transition-transform duration-300 group-hover/play:scale-110 motion-reduce:transition-none motion-reduce:group-hover/play:scale-100"
+                    >
+                      <Icon name="lucide:play" class="w-7 h-7 translate-x-0.5 fill-current" />
+                    </span>
+                  </button>
+                </div>
+              ) : (
+                <img src={project.gif}>
+              )}
               <div class="absolute top-4 left-4">
               </div>
             </div>
@@ -91,6 +138,26 @@ const projects = [
         ))}
       </div>
     </section>
+
+    <!-- Facade lazy-load: el iframe de YouTube se inyecta SOLO al click (protege LCP/CLS) -->
+    <script is:inline>
+      document.addEventListener("click", function (e) {
+        if (!(e.target instanceof Element)) return;
+        var btn = e.target.closest(".video-facade button");
+        if (!btn) return;
+        var box = btn.closest(".video-facade");
+        var iframe = document.createElement("iframe");
+        iframe.src =
+          "https://www.youtube-nocookie.com/embed/" + box.dataset.videoId + "?autoplay=1";
+        iframe.title = box.dataset.videoTitle;
+        iframe.setAttribute("allow", "autoplay; fullscreen; encrypted-media; picture-in-picture");
+        iframe.allowFullscreen = true;
+        iframe.loading = "lazy";
+        iframe.className = "absolute inset-0 w-full h-full border-0";
+        box.replaceChildren(iframe);
+        iframe.focus();
+      });
+    </script>
 
     <Contact />
   </main>
