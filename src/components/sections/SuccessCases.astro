@@ -169,7 +169,8 @@ const track = [
     overflow-x: auto;
     /* room para el hover-lift y el glow sin recorte vertical brusco */
     padding: 0.75rem 0.25rem 1.5rem;
-    scroll-snap-type: x proximity;
+    /* Sin scroll-snap en modo auto: el snap re-ajusta a la card más cercana en
+       cada frame y anula el auto-scroll. El swipe manual funciona igual sin snap. */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -183,7 +184,6 @@ const track = [
   }
   .di-card {
     flex: 0 0 80%; /* mobile: ~1.2 visibles (se asoma el siguiente) */
-    scroll-snap-align: start;
   }
   @media (min-width: 640px) {
     .di-card {
@@ -199,7 +199,10 @@ const track = [
      scrolleable a mano (el JS también respeta esto y no arranca el rAF). */
   @media (prefers-reduced-motion: reduce) {
     .di-track {
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+    }
+    .di-card {
+      scroll-snap-align: start;
     }
   }
 </style>
@@ -223,11 +226,15 @@ const track = [
     const SPEED = 0.5; // px por frame (~30px/s, lento y continuo)
     let paused = false;
     let rafId: number | null = null;
+    // Acumulador float: scrollLeft se redondea en algunos navegadores, así que
+    // 0.5px por frame se perdería. Llevamos la posición aparte y la asignamos.
+    let pos = track.scrollLeft;
 
     const step = () => {
       if (!paused) {
-        track.scrollLeft += SPEED;
-        if (track.scrollLeft >= half) track.scrollLeft -= half; // loop invisible
+        pos += SPEED;
+        if (pos >= half) pos -= half; // loop invisible (contenido idéntico)
+        track.scrollLeft = pos;
       }
       rafId = requestAnimationFrame(step);
     };
@@ -241,12 +248,20 @@ const track = [
       }
     };
 
+    const pause = () => (paused = true);
+    // Al reanudar, resincronizamos el acumulador con la posición real (por si el
+    // usuario arrastró manualmente mientras estaba pausado).
+    const resume = () => {
+      pos = track.scrollLeft;
+      paused = false;
+    };
+
     // Pausa en hover, foco de teclado y mientras el usuario arrastra.
     ["mouseenter", "focusin", "pointerdown", "touchstart"].forEach((e) =>
-      root.addEventListener(e, () => (paused = true)),
+      root.addEventListener(e, pause),
     );
     ["mouseleave", "focusout", "pointerup", "touchend"].forEach((e) =>
-      root.addEventListener(e, () => (paused = false)),
+      root.addEventListener(e, resume),
     );
 
     // Solo corre cuando la sección está en viewport (0 CPU en scroll largo).
