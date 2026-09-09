@@ -11,10 +11,11 @@ interface TeamMember {
   twitter?: string;
 }
 
+// Equipo en orden original (para móvil)
 const team: TeamMember[] = [
-{
+  {
     name: "Nadia Silva",
-    role: "Ingeniera Comercial  Administradora Pública",
+    role: "Ingeniera Comercial Administradora Pública",
     skills: "Asesora Comercial",
     linkedin: "https://www.linkedin.com/in/",
     photo: "/images/team/Nadia.jpeg"
@@ -33,7 +34,7 @@ const team: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/jnlsosses/",
     photo: "/images/team/john.jpg"
   },
-{
+  {
     name: "Luis Bernales",
     role: "Ingeniero Docente Analista BI",
     skills: "Análisis de Datos · Power BI · SQL · Excel Avanzado · DAX · Python",
@@ -48,6 +49,14 @@ const team: TeamMember[] = [
     photo: "/images/team/cori.png"
   },
 ];
+
+// Orden específico para desktop
+const desktopOrder = ["Luis Bernales", "Corina Rivera", "Pablo Inaipil", "Nadia Silva", "Juan Osses"];
+
+// Crear un array con el orden de desktop
+const desktopTeam = desktopOrder.map(name => 
+  team.find(member => member.name === name)
+).filter((member): member is TeamMember => member !== undefined);
 ---
 
 <section id="equipo" class="relative z-[1] py-24 px-6">
@@ -65,8 +74,9 @@ const team: TeamMember[] = [
       </p>
     </div>
 
-    <!-- Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Grid único que muestra diferente orden según el dispositivo -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <!-- En móvil: mostrar en orden original (team) -->
       {team.map((member, i) => (
         <div
           class:list={[
@@ -74,20 +84,31 @@ const team: TeamMember[] = [
             "hover:border-(--color-border-accent) hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
             "reveal",
             `reveal-delay-${i + 1}`,
+            // En mobile y tablet: mostrar en el orden original
+            // En desktop: ocultar estos (se mostrarán en el orden personalizado)
+            "lg:hidden",
           ]}
         >
-          <!-- Photo placeholder -->
+          <!-- Photo -->
           <div
             class="w-full aspect-square flex items-center justify-center text-5xl text-(--color-text-muted) relative overflow-hidden"
             style="background: linear-gradient(135deg, #1a1a3e, #2a1a4e);"
           >
             {member.photo ? (
-              <img src={member.photo} alt={member.name} class="w-full h-full object-cover" />
+              <img 
+                src={member.photo} 
+                alt={member.name} 
+                class="w-full h-full object-cover" 
+                loading="lazy" 
+                width="400" 
+                height="400"
+              />
             ) : (
               <Icon name="lucide:user" class="w-16 h-16" aria-hidden="true" />
             )}
-            <!-- Bottom gradient overlay -->
-            <div class="absolute bottom-0 left-0 right-0 h-1/2" style="background: linear-gradient(to top, var(--color-card), transparent);"></div>
+            {member.photo && (
+              <div class="absolute bottom-0 left-0 right-0 h-1/2" style="background: linear-gradient(to top, var(--color-card), transparent);"></div>
+            )}
           </div>
 
           <!-- Info -->
@@ -108,7 +129,77 @@ const team: TeamMember[] = [
                   class="text-xs text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors"
                   aria-label={`${member.name} en X`}
                 >
-                  𝕏
+                  <Icon name="lucide:twitter" class="w-4 h-4" />
+                </a>
+              )}
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-xs text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors"
+                aria-label={`${member.name} en LinkedIn`}
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <!-- En desktop: mostrar en orden personalizado (Luis, Corina, Pablo, Nadia, Juan) -->
+      {desktopTeam.map((member, i) => (
+        <div
+          class:list={[
+            "bg-(--color-card) border border-(--color-border-subtle) rounded-2xl overflow-hidden transition-all duration-400",
+            "hover:border-(--color-border-accent) hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]",
+            "reveal",
+            `reveal-delay-${i + 1}`,
+            // En desktop: mostrar con el orden personalizado
+            // En móvil: ocultar estos (se muestran los del orden original)
+            "hidden lg:block",
+          ]}
+        >
+          <!-- Photo -->
+          <div
+            class="w-full aspect-square flex items-center justify-center text-5xl text-(--color-text-muted) relative overflow-hidden"
+            style="background: linear-gradient(135deg, #1a1a3e, #2a1a4e);"
+          >
+            {member.photo ? (
+              <img 
+                src={member.photo} 
+                alt={member.name} 
+                class="w-full h-full object-cover" 
+                loading="lazy" 
+                width="400" 
+                height="400"
+              />
+            ) : (
+              <Icon name="lucide:user" class="w-16 h-16" aria-hidden="true" />
+            )}
+            {member.photo && (
+              <div class="absolute bottom-0 left-0 right-0 h-1/2" style="background: linear-gradient(to top, var(--color-card), transparent);"></div>
+            )}
+          </div>
+
+          <!-- Info -->
+          <div class="p-5">
+            <h4 class="text-base font-semibold mb-1">{member.name}</h4>
+            <div class="text-xs text-(--color-purple-400) mb-2 font-display">
+              {member.role}
+            </div>
+            <div class="text-xs text-(--color-text-muted) leading-relaxed mb-3">
+              {member.skills}
+            </div>
+            <div class="flex gap-3">
+              {member.twitter && (
+                <a
+                  href={member.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-xs text-(--color-text-muted) no-underline hover:text-(--color-purple-400) transition-colors"
+                  aria-label={`${member.name} en X`}
+                >
+                  <Icon name="lucide:twitter" class="w-4 h-4" />
                 </a>
               )}
               <a
