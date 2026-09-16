@@ -1,0 +1,127 @@
+---
+// Aquí defines la lógica y los datos en el frontmatter
+const plans = [
+  {
+    id: 1,
+    name: "Landing Page Profesional",
+    price: "350.000",
+    description: "Ideal para validar ideas o lanzar campañas rápidas.",
+    features: [
+      "1 página de alto rendimiento con Astro",
+      "Diseño a medida",
+      "SEO básico",
+      "Formulario de contacto",
+      "Hosting configurado (costo $0 o mínimo)"
+    ],
+    delivery: "7 días",
+    cta: "Cotizar mi landing page",
+    highlighted: false,
+  },
+  {
+    id: 2,
+    name: "Sitio Web Completo",
+    price: "500.000",
+    description: "Para empresas que necesitan una presencia digital sólida.",
+    features: [
+      "3-5 páginas (portafolio, servicios, contacto, etc.)",
+      "Diseño Responsive",
+      "SEO técnico",
+      "Google Business conectado"
+    ],
+    delivery: "2 semanas",
+    cta: "Cotizar mi sitio web",
+    highlighted: true, // Destacamos este plan
+  },
+  {
+    id: 3,
+    name: "Web + Datos + Automatización",
+    price: "900.000",
+    description: "El paquete integral para escalar tu negocio con datos.",
+    features: [
+      "Sitio web completo",
+      "Dashboard Power BI o automatización de 1 proceso",
+      "El paquete integral DataImpulsa"
+    ],
+    delivery: "A convenir",
+    cta: "Agendar diagnóstico gratuito",
+    highlighted: false,
+  }
+];
+---
+
+<section class="bg-[#0a0a0a] py-20 px-4 sm:px-6 lg:px-8 text-white font-sans">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">
+        Planes e <span class="text-[#FF6B00]">Inversión</span>
+      </h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        Soluciones tecnológicas a medida para impulsar tu negocio al siguiente nivel.
+      </p>
+    </div>
+
+    <!-- Grid de Planes -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      {plans.map((plan) => (
+        <div 
+          class={`relative flex flex-col p-8 rounded-2xl border transition-all duration-300 ${
+            plan.highlighted 
+              ? 'bg-[#1a1a1a] border-[#FF6B00] shadow-[0_0_30px_rgba(255,107,0,0.15)] transform md:-translate-y-4' 
+              : 'bg-[#111111] border-gray-800 hover:border-gray-600'
+          }`}
+        >
+          {plan.highlighted && (
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span class="bg-[#FF6B00] text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
+                Más Popular
+              </span>
+            </div>
+          )}
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-2">{plan.name}</h3>
+            <p class="text-gray-400 text-sm h-10">{plan.description}</p>
+          </div>
+
+          <div class="mb-6">
+            <span class="text-gray-400 text-sm">Desde</span>
+            <div class="flex items-baseline">
+              <span class="text-4xl font-bold text-white">${plan.price}</span>
+              <span class="text-gray-400 ml-2">CLP</span>
+            </div>
+          </div>
+
+          <ul class="flex-1 space-y-4 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#FF6B00] mr-3 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-300 text-sm">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mb-6 pt-6 border-t border-gray-800">
+            <p class="text-sm text-gray-400">
+              <span class="font-semibold text-white">Entrega:</span> {plan.delivery}
+            </p>
+          </div>
+
+          <a 
+            href="#contacto" 
+            class={`w-full py-3 px-4 rounded-lg font-bold text-center transition-colors duration-300 ${
+              plan.highlighted
+                ? 'bg-[#FF6B00] hover:bg-[#e65c00] text-white'
+                : 'bg-transparent border-2 border-[#FF6B00] text-[#FF6B00] hover:bg-[#FF6B00] hover:text-white'
+            }`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
