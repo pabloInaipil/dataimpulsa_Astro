@@ -1,0 +1,181 @@
+---
+// Datos de los testimonios.
+const testimonials = [
+  {
+    id: 1,
+    text: "Vengo trabajando hace muchos años con dataimpulsa y desde que lanzamos el sitio siempre he tenido el soporte técnico y el asesoramiento para mejorar mi posicionamiento en la web",
+    name: "Alex Norambuena",
+    role: "Gerente General",
+    company: "Todo Casa Construcciones",
+    image: "/testimonios/todocasa.png"
+  },
+  {
+    id: 2,
+    text: "El dashboard en Power BI nos permitió visualizar nuestros datos en tiempo real. Ahora tomamos decisiones basadas en información concreta y no en intuiciones.",
+    name: "Antonio Osses",
+    role: "Director de Operaciones",
+    company: "Innovatar Chile",
+    image: "testimonios/innovatar.png"
+  },
+  {
+    id: 3,
+    text: "La automatización de nuestro proceso de ventas nos ahorró más de 15 horas semanales. El equipo de DataImpulsa entendió perfectamente lo que necesitábamos.",
+    name: "Roberto González",
+    role: "Fundador",
+    company: "Robertours",
+    image: "testimonios/robertours.png"
+  }
+];
+---
+
+<section class="bg-[#0a0a0a] py-24 text-white font-sans overflow-hidden">
+  <!-- Contenedor más ancho: max-w-6xl -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Título -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        Lo que dicen nuestros <span class="text-[#FF6B00]">clientes</span>
+      </h2>
+      <p class="text-gray-400 text-lg">
+        Historias reales de empresas que ya impulsaron su negocio con nosotros.
+      </p>
+    </div>
+
+    <!-- Carrusel (Contenedor Principal más grande) -->
+    <div class="relative bg-[#111111] border border-gray-800 rounded-3xl overflow-hidden shadow-2xl min-h-[520px] md:min-h-[480px]">
+      
+      <!-- Contenedor de Slides -->
+      <div id="carousel-container" class="grid grid-cols-1 grid-rows-1 w-full h-full">
+        {testimonials.map((t, index) => (
+          <div 
+            class={`testimonial-slide col-start-1 row-start-1 w-full h-full p-10 md:p-16 flex flex-col items-center justify-center text-center transition-all duration-1000 ease-in-out ${
+              index === 0 ? 'opacity-100 scale-100 z-10 relative' : 'opacity-0 scale-95 z-0 absolute pointer-events-none'
+            }`}
+          >
+            <!-- Contenedor de la imagen: fondo blanco para logos -->
+            <div class="bg-white rounded-2xl p-4 mb-8 shadow-2xl flex items-center justify-center w-40 h-40 md:w-48 md:h-48">
+              <img 
+                src={t.image} 
+                alt={`Logo o foto de ${t.name}`} 
+                class="max-w-full max-h-full object-contain"
+              />
+            </div>
+            
+            <!-- Texto más grande -->
+            <p class="text-gray-300 text-xl md:text-2xl italic mb-8 leading-relaxed max-w-3xl">
+              "{t.text}"
+            </p>
+            <div>
+              <h4 class="font-bold text-white text-xl md:text-2xl">{t.name}</h4>
+              <p class="text-[#FF6B00] text-base md:text-lg font-medium mt-1">{t.role} · {t.company}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Botones de Navegación -->
+      <button 
+        id="prevBtn" 
+        aria-label="Testimonio anterior"
+        class="absolute top-1/2 left-4 md:left-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+      >
+        <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button 
+        id="nextBtn" 
+        aria-label="Siguiente testimonio"
+        class="absolute top-1/2 right-4 md:right-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+      >
+        <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Indicadores (Dots) -->
+      <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-2 z-20" id="dots-container">
+        {testimonials.map((_, index) => (
+          <button 
+            class={`dot h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-[#FF6B00] w-8' : 'bg-gray-600 hover:bg-gray-400 w-3'}`}
+            data-index={index}
+            aria-label={`Ir al testimonio ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Script del Carrusel -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.testimonial-slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dots = document.querySelectorAll('.dot');
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+      let autoPlayInterval;
+
+      function updateCarousel() {
+        slides.forEach((slide, index) => {
+          if (index === currentIndex) {
+            slide.classList.remove('opacity-0', 'scale-95', 'z-0', 'absolute', 'pointer-events-none');
+            slide.classList.add('opacity-100', 'scale-100', 'z-10', 'relative');
+          } else {
+            slide.classList.remove('opacity-100', 'scale-100', 'z-10', 'relative');
+            slide.classList.add('opacity-0', 'scale-95', 'z-0', 'absolute', 'pointer-events-none');
+          }
+        });
+        
+        dots.forEach((dot, index) => {
+          if (index === currentIndex) {
+            dot.classList.remove('bg-gray-600', 'hover:bg-gray-400', 'w-3');
+            dot.classList.add('bg-[#FF6B00]', 'w-8');
+          } else {
+            dot.classList.remove('bg-[#FF6B00]', 'w-8');
+            dot.classList.add('bg-gray-600', 'hover:bg-gray-400', 'w-3');
+          }
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+      }
+
+      nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+      prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          updateCarousel();
+          resetAutoPlay();
+        });
+      });
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 10000);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+      }
+
+      startAutoPlay();
+
+      const carouselContainer = document.getElementById('carousel-container').parentElement;
+      carouselContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    });
+  </script>
+</section>
