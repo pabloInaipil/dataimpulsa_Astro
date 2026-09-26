@@ -74,11 +74,19 @@ const testimonials = [
         ))}
       </div>
 
-      <!-- Botones de Navegación -->
+      <!--
+        Botones de Navegación
+        Antes: `top-1/2 -translate-y-1/2` centraba respecto a TODA la card,
+        que varía según el largo del testimonio (justify-center empuja el
+        centro real hacia el texto cuando es largo).
+        Ahora: posición fija calculada para el centro de la foto
+        (padding p-10/p-16 + mitad de w-40/w-48 h-40/h-48), así el botón
+        siempre queda a la altura de la imagen, sin importar el texto.
+      -->
       <button 
         id="prevBtn" 
         aria-label="Testimonio anterior"
-        class="absolute top-1/2 left-4 md:left-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+        class="absolute top-[120px] md:top-[160px] left-4 md:left-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
       >
         <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -88,7 +96,7 @@ const testimonials = [
       <button 
         id="nextBtn" 
         aria-label="Siguiente testimonio"
-        class="absolute top-1/2 right-4 md:right-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+        class="absolute top-[120px] md:top-[160px] right-4 md:right-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
       >
         <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
