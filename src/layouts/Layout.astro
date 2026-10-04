@@ -115,9 +115,10 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     });
   }
 
-  // --- Scroll Reveal FIX MOBILE ---
+  // --- Scroll Reveal (desktop y mobile) ---
   function initReveal() {
-    const els = document.querySelectorAll(".reveal");
+    // Solo los que aún no se han revelado (evita re-observar en astro:page-load)
+    const els = document.querySelectorAll(".reveal:not(.is-visible)");
     if (!els.length) return;
 
     // Accesibilidad: si el usuario pide menos movimiento, mostrar todo
@@ -131,9 +132,8 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
       return;
     }
 
-    // Observer optimizado para mobile: threshold 0 + rootMargin en %
-    // - threshold 0 es independiente del alto del viewport (fix para celulares cortos)
-    // - rootMargin 15% dispara antes de que el elemento esté totalmente visible
+    // threshold 0 es independiente del alto del viewport (celulares cortos)
+    // rootMargin en % dispara un poco antes de que el elemento esté totalmente visible
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -151,32 +151,16 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
 
     els.forEach((el) => observer.observe(el));
     
-    // Fallback: si algo no se observó en 3s (scroll muy rápido en iOS), forzar visible
+    // Red de seguridad: si algo no se reveló en 3s (scroll muy rápido en iOS), mostrarlo
     setTimeout(() => {
-      els.forEach((el) => {
-        if (!el.classList.contains("is-visible")) {
-          el.classList.add("is-visible");
-        }
-      });
+      els.forEach((el) => el.classList.add("is-visible"));
     }, 3000);
   }
 
   function boot() {
-  initThemeToggle();
-  // FIX NUCLEAR: mostrar todo inmediatamente, animación solo en desktop
-  document.querySelectorAll(".reveal").forEach(el => {
-    el.classList.add("is-visible");
-    el.style.opacity = "1";
-    el.style.transform = "none";
-  });
-  
-  // Solo si es desktop, intentar animar
-  if (window.innerWidth > 768) {
-    requestAnimationFrame(() => {
-      setTimeout(initReveal, 80);
-    });
+    initThemeToggle();
+    initReveal();
   }
-}
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);
