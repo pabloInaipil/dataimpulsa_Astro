@@ -1,50 +1,82 @@
 ---
-// src/components/sections/Services.astro
-// Features de la línea principal: desarrollo web con Astro.
+// Bloque de beneficios centrados con animación touch/hover
+import { Icon } from "astro-icon/components";
+
 const features = [
   {
     title: "Ultra rápido",
     description: "Páginas que cargan al instante.",
-    icon: "M13 2 3 14h7l-1 8 10-12h-7l1-8z",
+    icon: "lucide:zap",
   },
   {
     title: "SEO nativo",
     description: "Mejor posicionamiento desde el código.",
-    icon: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.35-4.35",
+    icon: "lucide:search",
   },
   {
     title: "Arquitectura moderna",
     description: "Jamstack, escalable y segura.",
-    icon: "M12 2 2 7l10 5 10-5-10-5ZM2 12l10 5 10-5M2 17l10 5 10-5",
+    icon: "lucide:layers",
   },
   {
     title: "Experiencia increíble",
     description: "Interfaces fluidas y sin distracciones.",
-    icon: "M12 3v2m6.4.6-1.5 1.5M21 12h-2M5.1 5.6l1.5 1.5M3 12h2m2.6 6.4 1.5-1.5m5.8 0 1.5 1.5M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
+    icon: "lucide:sparkles",
   },
   {
     title: "100% a medida",
     description: "Diseñado para tu negocio.",
-    icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z",
+    icon: "lucide:target",
   },
 ];
 ---
 
-<section id="servicios" class="relative z-[1] py-16 px-6 border-t border-b border-(--color-border-subtle) bg-(--color-surface)/50">
-  <h2 class="sr-only">Beneficios del desarrollo web con Astro</h2>
-  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-    {features.map((f, i) => (
-      <div class:list={["flex items-start gap-4 lg:flex-col lg:gap-0 reveal", `reveal-delay-${(i % 4) + 1}`]}>
-        <div class="w-12 h-12 rounded-full grid place-items-center shrink-0 border border-(--color-border-accent) bg-accent/10 text-accent lg:mb-4">
-          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d={f.icon}></path>
-          </svg>
+<section class="relative z-[1] py-16 px-4 sm:px-6 bg-(--color-surface)/40 border-y border-(--color-border-subtle)">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-4 justify-items-center text-center">
+      {features.map((f, i) => (
+        <div
+          class={`feature-card group flex flex-col items-center text-center max-w-[160px] reveal reveal-delay-${(i % 4) + 1}`}
+        >
+          <!-- Icono -->
+          <div class="feature-icon w-14 h-14 rounded-full bg-accent/10 border border-(--color-border-accent) flex items-center justify-center mb-4 text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-500/25 group-active:scale-95">
+            <Icon name={f.icon} class="w-6 h-6" />
+          </div>
+
+          <h3 class="text-sm md:text-base font-semibold text-(--color-text-primary) mb-1 font-display">
+            {f.title}
+          </h3>
+          <p class="text-xs md:text-sm text-(--color-text-secondary) leading-relaxed">
+            {f.description}
+          </p>
         </div>
-        <div>
-          <h3 class="text-base font-semibold mb-1">{f.title}</h3>
-          <p class="text-sm text-(--color-text-secondary) leading-relaxed">{f.description}</p>
-        </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .feature-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .feature-card:hover,
+  .feature-card:active {
+    transform: translateY(-6px);
+  }
+
+  /* Toque en móvil */
+  .feature-card:active .feature-icon {
+    transform: scale(0.92);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-card,
+    .feature-icon {
+      transition: none !important;
+    }
+    .feature-card:hover {
+      transform: none !important;
+    }
+  }
+</style>
