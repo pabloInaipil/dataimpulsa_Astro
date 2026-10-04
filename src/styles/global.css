@@ -244,3 +244,16 @@ html.light .grid-bg {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
 }
+
+/* Botones con fondo accent → texto siempre blanco */
+.bg-accent,
+a.bg-accent,
+button.bg-accent {
+  color: #ffffff !important;
+}
+
+.bg-accent:hover,
+a.bg-accent:hover,
+button.bg-accent:hover {
+  color: #ffffff !important;
+}
