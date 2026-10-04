@@ -93,29 +93,64 @@ const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
       ))}
     </div>
 
-    <!-- Barra de métricas -->
-    <div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-2xl p-6 md:p-8 mb-10 reveal reveal-delay-2">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
-        {metrics.map((m) => (
-          <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
-              <Icon name={m.icon} class="w-4 h-4" />
-            </div>
-            <div>
-              <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
-                {m.value}
-              </p>
-              <p class="text-sm font-medium text-(--color-text-primary)">
-                {m.label}
-              </p>
-              <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">
-                {m.sub}
-              </p>
-            </div>
-          </div>
-        ))}
+   <!-- Barra de métricas -->
+<div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-2xl p-6 md:p-8 mb-10 reveal reveal-delay-2" data-metrics>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
+    
+    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0s">
+      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+        <Icon name="lucide:gauge" class="w-4 h-4" />
+      </div>
+      <div>
+        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+          <span data-count="98" data-suffix="/100">98/100</span>
+        </p>
+        <p class="text-sm font-medium text-(--color-text-primary)">PageSpeed Insights</p>
+        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Puntuación promedio en dispositivos móviles</p>
       </div>
     </div>
+
+    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.3s">
+      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+        <Icon name="lucide:clock" class="w-4 h-4" />
+      </div>
+      <div>
+        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+          <span data-count="0.6" data-dec="1" data-suffix="s">0.6s</span>
+        </p>
+        <p class="text-sm font-medium text-(--color-text-primary)">Tiempo de carga promedio</p>
+        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Sitios ligeros y optimizados</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.6s">
+      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+        <Icon name="lucide:shield-check" class="w-4 h-4" />
+      </div>
+      <div>
+        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+          <span data-count="99.9" data-dec="1" data-suffix="%">99.9%</span>
+        </p>
+        <p class="text-sm font-medium text-(--color-text-primary)">Disponibilidad</p>
+        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Infraestructura confiable y segura.</p>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.9s">
+      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+        <Icon name="lucide:trending-up" class="w-4 h-4" />
+      </div>
+      <div>
+        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+          <span data-count="35" data-prefix="+" data-suffix="%">+35%</span>
+        </p>
+        <p class="text-sm font-medium text-(--color-text-primary)">Crecimiento promedio</p>
+        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Resultados reales para nuestros clientes.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
     <!-- Logos de confianza -->
     <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 reveal reveal-delay-3">
@@ -131,3 +166,67 @@ const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
 
   </div>
 </section>
+
+<style>
+  .metric-float {
+    animation: float-metric 3.5s ease-in-out infinite;
+  }
+
+  @keyframes float-metric {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .metric-float {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  const section = document.querySelector("[data-metrics]");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (section && !reduced) {
+    const targets = [...section.querySelectorAll<HTMLElement>("[data-count]")].map((el) => ({
+      el,
+      to: parseFloat(el.dataset.count ?? "0"),
+      dec: parseInt(el.dataset.dec ?? "0", 10),
+      prefix: el.dataset.prefix ?? "",
+      suffix: el.dataset.suffix ?? "",
+    }));
+
+    // Empezar en 0
+    for (const t of targets) {
+      t.el.textContent = t.prefix + (0).toFixed(t.dec) + t.suffix;
+    }
+
+    const DURATION = 1600;
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+
+        let start: number | undefined;
+        const tick = (now: number) => {
+          if (start === undefined) start = now;
+          const p = easeOut(Math.min((now - start) / DURATION, 1));
+
+          for (const t of targets) {
+            const val = (t.to * p).toFixed(t.dec);
+            t.el.textContent = t.prefix + val + t.suffix;
+          }
+
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.3 }
+    );
+
+    io.observe(section);
+  }
+</script>
