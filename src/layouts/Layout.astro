@@ -162,12 +162,21 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
   }
 
   function boot() {
-    initThemeToggle();
-    // Esperar a que el layout se estabilice (fix barra de Chrome en Android/iOS)
+  initThemeToggle();
+  // FIX NUCLEAR: mostrar todo inmediatamente, animación solo en desktop
+  document.querySelectorAll(".reveal").forEach(el => {
+    el.classList.add("is-visible");
+    el.style.opacity = "1";
+    el.style.transform = "none";
+  });
+  
+  // Solo si es desktop, intentar animar
+  if (window.innerWidth > 768) {
     requestAnimationFrame(() => {
       setTimeout(initReveal, 80);
     });
   }
+}
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);

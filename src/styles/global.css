@@ -179,11 +179,15 @@ html.light .grid-bg {
   background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
 }
 
-/* ===== SCROLL-DRIVEN ANIMATIONS — FIX MOBILE ===== */
-/* Estado base sin JS: SIEMPRE visible (evita FOUC e invisibles en mobile) */
-.reveal {
-  opacity: 1;
-  transform: translateY(0);
+/* ===== FIX NUCLEAR: TODO VISIBLE SIEMPRE ===== */
+.reveal,
+.reveal-delay-1,
+.reveal-delay-2,
+.reveal-delay-3,
+.reveal-delay-4 {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 /* Solo cuando JS está listo y el usuario permite animaciones, ocultamos para animar */
