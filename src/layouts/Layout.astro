@@ -92,7 +92,7 @@ const fullTitle = title === "Inicio" ? `DatAImpulsa — Sitios Web y Business In
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
     }
-    return "dark";
+    return "light";
   })();
 
   document.documentElement.classList.toggle("light", theme === "light");

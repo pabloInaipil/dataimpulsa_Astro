@@ -4,385 +4,95 @@ import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config/site";
 ---
 
-<section class="relative min-h-screen flex items-center justify-center pt-36 pb-20 px-6 overflow-hidden">
-  <!-- Starfield: canvas vanilla, pintado antes que el horizonte para que el
-       bloom lo atenúe y el disco opaco lo ocluya bajo la línea del horizonte.
-       Oculto en theme light (no hay cielo nocturno) y con reduced-motion el
-       script nunca lo inicializa. -->
-  <canvas id="hero-stars" class="hero-stars absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+<section class="relative pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 overflow-hidden bg-(--color-deep)">
+  <!-- Fondo con gradiente azul -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0B1D36] to-[#0F2744] pointer-events-none"></div>
+  
+  <!-- Patrón de puntos sutil -->
+  <div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle, rgba(59,130,246,0.15) 1px, transparent 1px); background-size: 28px 28px;"></div>
 
-  <!-- Horizonte curvo "amanecer" — 100% CSS (gradientes + border-radius), sin imágenes -->
-  <div class="hero-horizon absolute inset-0 pointer-events-none" aria-hidden="true">
-    <!-- Llamaradas: pulsos de gradiente sobre la cresta del arco. Duraciones
-         primas entre sí para que el ciclo combinado no se perciba como loop.
-         Base opacity:0 → con prefers-reduced-motion quedan invisibles solas. -->
-    <div class="hero-flare hero-flare--a"></div>
-    <div class="hero-flare hero-flare--b"></div>
-    <div class="hero-flare hero-flare--c"></div>
-    <!-- Halos: anillos elípticos que se expanden desde la cresta. Pintados
-         antes del ::after (disco), así su mitad inferior queda ocluida y solo
-         se ve el arco superior emanando del sol. -->
-    <div class="hero-halo hero-halo--1"></div>
-    <div class="hero-halo hero-halo--2"></div>
-  </div>
+  <div class="relative z-10 max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <!-- Columna izquierda: Texto -->
+      <div class="text-center lg:text-left">
+        <p class="text-accent text-xs md:text-sm font-semibold tracking-widest uppercase mb-4 font-display">
+          Agencia Digital Chilena
+        </p>
+        
+        <h1 class="text-4xl sm:text-5xl md:text-[3.4rem] font-bold leading-[1.1] tracking-tight text-white mb-6 font-display">
+          Tu empresa visible,<br />
+          automatizada e<br />
+          <span class="text-white">inteligente</span>
+        </h1>
+        
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
+          Impulsamos el crecimiento de tu negocio con sitios web de alto rendimiento, datos que hablan y procesos inteligentes.
+        </p>
+        
+        <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+          <a
+            href={siteConfig.cta.href}
+            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold text-white no-underline bg-accent hover:bg-accent-hover transition-all duration-300 shadow-lg shadow-blue-500/25"
+          >
+            Agendar reunión
+            <Icon name="lucide:arrow-right" class="w-4 h-4" />
+          </a>
+          <a
+            href="/#servicios"
+            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg text-sm font-semibold text-white no-underline border border-white/25 hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+          >
+            Conocer servicios
+            <Icon name="lucide:minus" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
 
-  <div class="max-w-4xl mx-auto text-center relative z-[1]">
-    <!-- Badge -->
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium font-display text-accent-light mb-8 border border-(--color-border-accent) bg-accent/10">
-      <span class="badge-dot w-1.5 h-1.5 rounded-full bg-accent"></span>
-      <Icon name="lucide:zap" class="w-3.5 h-3.5" aria-hidden="true" />
-      Desarrollo web ultra rápido con Astro
-    </div>
-
-    <h1 class="text-[clamp(2.6rem,6vw,4.6rem)] font-bold leading-[1.08] tracking-tight mb-6">
-      Sitios web hiper rápidos<br />
-      con <span class="gradient-text">Astro.</span>
-      <Icon name="lucide:rocket" class="inline-block w-[0.85em] h-[0.85em] align-[-0.08em] text-accent" aria-hidden="true" />
-    </h1>
-
-    <p class="text-lg md:text-xl text-(--color-text-secondary) leading-relaxed mb-10 max-w-[640px] mx-auto">
-      Desarrollamos sitios web modernos, ligeros y escalables con Astro.
-      Máximo rendimiento, SEO perfecto y experiencias increíbles.
-    </p>
-
-    <div class="flex gap-4 items-center justify-center flex-wrap">
-      <a
-        href={siteConfig.cta.href}
-        class="inline-block px-7 py-3.5 rounded-lg text-sm font-semibold text-stone-900 no-underline transition-all duration-300 bg-accent hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-[0_10px_30px_var(--color-accent-glow-strong)]"
-      >
-        {siteConfig.cta.label}
-      </a>
-      <a
-        href="/#casos"
-        class="inline-block px-7 py-3.5 rounded-lg text-sm font-semibold text-(--color-text-primary) no-underline border border-(--color-border-subtle) bg-transparent transition-all duration-300 hover:border-(--color-border-accent)"
-      >
-        Ver casos de éxito →
-      </a>
+      <!-- Columna derecha: Card Dashboard + Robot -->
+      <div class="relative flex justify-center lg:justify-end overflow-visible">
+        <!-- Card Dashboard -->
+        <div class="relative w-full max-w-md bg-[#0F2744]/90 backdrop-blur-md border border-blue-500/20 rounded-2xl p-5 shadow-2xl shadow-blue-900/40 z-10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-white text-sm font-semibold font-display">Vista de negocio en tiempo real</h3>
+            <span class="flex items-center gap-1.5 text-xs text-emerald-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Actualizado ahora
+            </span>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-3 mb-5">
+            <div class="bg-[#0A1628]/60 rounded-xl p-3 border border-white/5">
+              <p class="text-[11px] text-slate-400 mb-1">Usuarios</p>
+              <p class="text-xl font-bold text-white font-display">24.580</p>
+              <p class="text-[11px] text-emerald-400">+12.5%</p>
+            </div>
+            <div class="bg-[#0A1628]/60 rounded-xl p-3 border border-white/5">
+              <p class="text-[11px] text-slate-400 mb-1">Conversiones</p>
+              <p class="text-xl font-bold text-white font-display">3.42%</p>
+              <p class="text-[11px] text-emerald-400">+8.1%</p>
+            </div>
+            <div class="bg-[#0A1628]/60 rounded-xl p-3 border border-white/5">
+              <p class="text-[11px] text-slate-400 mb-1">Ingresos</p>
+              <p class="text-xl font-bold text-white font-display">$128.7M</p>
+              <p class="text-[11px] text-emerald-400">+15.3%</p>
+            </div>
+          </div>
+          
+          <!-- Mini chart -->
+          <div class="h-20 w-full">
+            <svg viewBox="0 0 300 80" class="w-full h-full" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,60 C40,55 60,45 90,40 C120,35 150,50 180,35 C210,20 240,25 270,15 L300,10 L300,80 L0,80 Z" fill="url(#chartGradient)"/>
+              <path d="M0,60 C40,55 60,45 90,40 C120,35 150,50 180,35 C210,20 240,25 270,15 L300,10" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<style>
-  .hero-horizon {
-    /* Únicos knobs de ajuste: tamaño del disco y cuánto arco asoma */
-    --horizon-size: max(200vw, 48rem);
-    --horizon-visible: clamp(64px, 10vh, 170px);
-  }
-
-  /* Atmósfera: bloom que sube desde el horizonte.
-     Dos capas del mismo gradiente tokenizado apiladas = núcleo más cálido
-     sin introducir colores nuevos. */
-  .hero-horizon::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: var(--horizon-visible);
-    width: max(120vw, 56rem);
-    height: clamp(20rem, 46vh, 34rem);
-    transform: translate(-50%, 50%);
-    background:
-      radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 72%),
-      radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 45%);
-  }
-
-  /* Disco "planeta": solo asoma el arco superior (border-radius 50% sobre un
-     círculo de ~200vw). El relleno opaco ocluye el bloom bajo la línea del
-     horizonte y funde a --color-deep hacia la sección siguiente. */
-  .hero-horizon::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: var(--horizon-size);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    transform: translate(-50%, calc(100% - var(--horizon-visible)));
-    background:
-      radial-gradient(closest-side, transparent 88%, var(--color-accent-glow) 98%, var(--color-accent-glow-strong) 100%),
-      var(--color-deep);
-    border: 1px solid var(--color-accent);
-    box-shadow:
-      0 0 40px var(--color-accent-glow-strong),
-      0 0 140px 40px var(--color-accent-glow),
-      inset 0 0 80px var(--color-accent-glow);
-  }
-
-  /* El starfield es estética de cielo nocturno: en light theme se oculta.
-     display:none dispara el IntersectionObserver del script (no-intersecting)
-     y el loop rAF se pausa solo. */
-  :global(html.light) .hero-stars {
-    display: none;
-  }
-
-  /* ===== Llamaradas ===== */
-  /* Blobs de gradiente anclados a la cresta. Solo animan transform/opacity
-     (compositor). Opacidad base 0: sin animación (reduced-motion) no existen
-     visualmente y el hero queda idéntico al estático actual. */
-  .hero-flare {
-    position: absolute;
-    bottom: var(--horizon-visible);
-    aspect-ratio: 1.6;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, var(--color-accent-glow-strong), transparent 70%);
-    opacity: 0;
-    transform: translate(-50%, 50%);
-  }
-  .hero-flare--a {
-    left: 32%;
-    width: clamp(10rem, 22vw, 18rem);
-  }
-  .hero-flare--b {
-    left: 50%;
-    width: clamp(14rem, 30vw, 26rem);
-  }
-  .hero-flare--c {
-    left: 69%;
-    width: clamp(9rem, 18vw, 15rem);
-  }
-
-  /* ===== Halos ===== */
-  /* Anillos elípticos centrados en la cresta; el disco (::after) pinta encima
-     y ocluye su mitad inferior → solo el arco superior emana del sol. */
-  .hero-halo {
-    position: absolute;
-    left: 50%;
-    bottom: var(--horizon-visible);
-    width: clamp(22rem, 52vw, 46rem);
-    aspect-ratio: 2.8;
-    border-radius: 50%;
-    border: 1px solid var(--color-accent);
-    box-shadow:
-      0 0 24px var(--color-accent-glow),
-      inset 0 0 18px var(--color-accent-glow);
-    opacity: 0;
-    transform: translate(-50%, 50%) scale(0.25);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    /* Respiración del bloom atmosférico */
-    .hero-horizon::before {
-      animation: hero-bloom 9s ease-in-out infinite alternate;
-    }
-    .hero-flare--a {
-      animation: hero-flare 7s ease-in-out infinite alternate;
-      animation-delay: -2s;
-    }
-    .hero-flare--b {
-      animation: hero-flare 11s ease-in-out infinite alternate;
-      animation-delay: -5s;
-    }
-    .hero-flare--c {
-      animation: hero-flare 9s ease-in-out infinite alternate;
-      animation-delay: -8s;
-    }
-    .hero-halo--1 {
-      animation: hero-halo 9s ease-out infinite;
-    }
-    .hero-halo--2 {
-      animation: hero-halo 9s ease-out infinite;
-      animation-delay: -4.5s;
-    }
-  }
-
-  @keyframes hero-bloom {
-    from {
-      opacity: 0.78;
-      transform: translate(-50%, 50%) scale(1);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, 50%) scale(1.06);
-    }
-  }
-
-  @keyframes hero-flare {
-    from {
-      opacity: 0.1;
-      transform: translate(-50%, 50%) scale(0.92);
-    }
-    to {
-      opacity: 0.55;
-      transform: translate(-50%, 50%) scale(1.12);
-    }
-  }
-
-  @keyframes hero-halo {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, 50%) scale(0.25);
-    }
-    14% {
-      opacity: 0.35;
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, 50%) scale(1.55);
-    }
-  }
-
-  .badge-dot {
-    animation: blink 2s ease-in-out infinite;
-  }
-</style>
-
-<script>
-  // Starfield del hero: canvas vanilla, sin librerías.
-  // Presupuesto: <1ms/frame desktop (~130 estrellas), <0.5ms mobile (~45).
-  // Se pausa fuera de viewport (IntersectionObserver) y no se inicializa con
-  // prefers-reduced-motion. El init corre en idle para no competir con el LCP.
-  const canvas = document.getElementById("hero-stars") as HTMLCanvasElement | null;
-
-  if (canvas && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const start = () => initStars(canvas);
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(start, { timeout: 2000 });
-    } else {
-      setTimeout(start, 300);
-    }
-  }
-
-  function initStars(canvas: HTMLCanvasElement) {
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const coarse = matchMedia("(pointer: coarse)").matches || innerWidth < 768;
-    const dpr = Math.min(devicePixelRatio || 1, coarse ? 1 : 1.5);
-    const MAX_SHIFT = 12; // px de parallax en la capa más cercana
-
-    // Colores desde las CSS vars del theme (regla de paleta del proyecto).
-    // El canvas solo existe en dark, así que basta leerlos una vez.
-    const rootStyle = getComputedStyle(document.documentElement);
-    const starColor = rootStyle.getPropertyValue("--color-text-primary").trim() || "#f5f5f4";
-    const tintColor = rootStyle.getPropertyValue("--color-accent-light").trim() || "#fb923c";
-
-    // Un sprite pre-renderizado por color: núcleo sólido + falloff suave.
-    // drawImage de un sprite chico es más barato que arc()+fill por estrella.
-    const makeSprite = (color: string) => {
-      const s = document.createElement("canvas");
-      s.width = s.height = 32;
-      const sc = s.getContext("2d")!;
-      const g = sc.createRadialGradient(16, 16, 0, 16, 16, 16);
-      g.addColorStop(0, color);
-      g.addColorStop(0.35, color);
-      g.addColorStop(1, "transparent");
-      sc.fillStyle = g;
-      sc.fillRect(0, 0, 32, 32);
-      return s;
-    };
-    const spriteWhite = makeSprite(starColor);
-    const spriteTint = makeSprite(tintColor);
-
-    type Star = {
-      x: number; y: number; r: number; depth: number;
-      base: number; amp: number; speed: number; phase: number;
-      dx: number; dy: number; sprite: HTMLCanvasElement;
-    };
-
-    let stars: Star[] = [];
-    let w = 0;
-    let h = 0;
-
-    const build = () => {
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const cap = coarse ? 45 : 130;
-      const count = Math.min(cap, Math.round((w * h) / 14000));
-      stars = [];
-      for (let i = 0; i < count; i++) {
-        const bright = Math.random() < 0.1; // pocas estrellas grandes y brillantes
-        const depth = 0.3 + Math.random() * 0.7;
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h * 0.82, // solo el espacio negro superior
-          r: bright ? 1.6 + Math.random() * 1.6 : 0.6 + Math.random() * 1.1,
-          depth,
-          base: bright ? 0.75 : 0.35 + Math.random() * 0.3,
-          amp: 0.12 + Math.random() * 0.18,
-          speed: 0.0004 + Math.random() * 0.0008,
-          phase: Math.random() * Math.PI * 2,
-          // Deriva mínima solo en touch (sin parallax): vida a costo ~0
-          dx: coarse ? (Math.random() - 0.5) * 0.012 : 0,
-          dy: coarse ? -Math.random() * 0.006 : 0,
-          sprite: Math.random() < 0.15 ? spriteTint : spriteWhite,
-        });
-      }
-    };
-    build();
-
-    // Parallax: el listener solo guarda el target normalizado (-1..1);
-    // el loop rAF ya activo hace el lerp → throttle natural por frame.
-    let targetX = 0;
-    let targetY = 0;
-    let curX = 0;
-    let curY = 0;
-    if (matchMedia("(pointer: fine)").matches) {
-      addEventListener(
-        "pointermove",
-        (e) => {
-          targetX = (e.clientX / innerWidth) * 2 - 1;
-          targetY = (e.clientY / innerHeight) * 2 - 1;
-        },
-        { passive: true }
-      );
-    }
-
-    let raf = 0;
-    const frame = (t: number) => {
-      raf = requestAnimationFrame(frame);
-      curX += (targetX - curX) * 0.05;
-      curY += (targetY - curY) * 0.05;
-
-      ctx.clearRect(0, 0, w, h);
-      for (const s of stars) {
-        if (s.dx !== 0 || s.dy !== 0) {
-          s.x = (s.x + s.dx + w) % w;
-          s.y = (s.y + s.dy + h) % h;
-        }
-        ctx.globalAlpha = Math.max(
-          0,
-          s.base + Math.sin(t * s.speed + s.phase) * s.amp
-        );
-        const px = s.x + curX * MAX_SHIFT * s.depth;
-        const py = s.y + curY * MAX_SHIFT * s.depth;
-        const d = s.r * 2;
-        ctx.drawImage(s.sprite, px - s.r, py - s.r, d, d);
-      }
-    };
-
-    // Pausa fuera de viewport (protege TBT al scrollear). display:none del
-    // theme light también cae acá: el IO reporta no-intersecting.
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        if (!raf) raf = requestAnimationFrame(frame);
-      } else {
-        cancelAnimationFrame(raf);
-        raf = 0;
-      }
-    });
-    io.observe(canvas);
-
-    // Re-init debounced; ignora el resize menor de la URL bar mobile al scrollear.
-    let lastW = w;
-    let lastH = h;
-    let timer = 0;
-    addEventListener(
-      "resize",
-      () => {
-        clearTimeout(timer);
-        timer = window.setTimeout(() => {
-          const cw = canvas.clientWidth;
-          const ch = canvas.clientHeight;
-          if (cw === lastW && Math.abs(ch - lastH) < 120) return;
-          lastW = cw;
-          lastH = ch;
-          build();
-        }, 150);
-      },
-      { passive: true }
-    );
-  }
-</script>

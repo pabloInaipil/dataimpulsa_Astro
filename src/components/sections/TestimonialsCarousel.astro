@@ -28,22 +28,22 @@ const testimonials = [
 ];
 ---
 
-<section class="bg-[#0a0a0a] py-24 text-white font-sans overflow-hidden">
+<section class="bg-(--color-deep) py-24 text-(--color-text-primary) overflow-hidden">
   <!-- Contenedor más ancho: max-w-6xl -->
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Título -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        Lo que dicen nuestros <span class="text-[#FF6B00]">clientes</span>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 font-display">
+        Lo que dicen nuestros <span class="text-accent">clientes</span>
       </h2>
-      <p class="text-gray-400 text-lg">
+      <p class="text-(--color-text-secondary) text-lg">
         Historias reales de empresas que ya impulsaron su negocio con nosotros.
       </p>
     </div>
 
     <!-- Carrusel (Contenedor Principal más grande) -->
-    <div class="relative bg-[#111111] border border-gray-800 rounded-3xl overflow-hidden shadow-2xl min-h-[520px] md:min-h-[480px]">
+    <div class="relative bg-(--color-card) border border-(--color-border-subtle) rounded-3xl overflow-hidden shadow-2xl min-h-[520px] md:min-h-[480px]">
       
       <!-- Contenedor de Slides -->
       <div id="carousel-container" class="grid grid-cols-1 grid-rows-1 w-full h-full">
@@ -63,30 +63,22 @@ const testimonials = [
             </div>
             
             <!-- Texto más grande -->
-            <p class="text-gray-300 text-xl md:text-2xl italic mb-8 leading-relaxed max-w-3xl">
+            <p class="text-(--color-text-secondary) text-xl md:text-2xl italic mb-8 leading-relaxed max-w-3xl">
               "{t.text}"
             </p>
             <div>
-              <h4 class="font-bold text-white text-xl md:text-2xl">{t.name}</h4>
-              <p class="text-[#FF6B00] text-base md:text-lg font-medium mt-1">{t.role} · {t.company}</p>
+              <h4 class="font-bold text-(--color-text-primary) text-xl md:text-2xl font-display">{t.name}</h4>
+              <p class="text-accent text-base md:text-lg font-medium mt-1">{t.role} · {t.company}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <!--
-        Botones de Navegación
-        Antes: `top-1/2 -translate-y-1/2` centraba respecto a TODA la card,
-        que varía según el largo del testimonio (justify-center empuja el
-        centro real hacia el texto cuando es largo).
-        Ahora: posición fija calculada para el centro de la foto
-        (padding p-10/p-16 + mitad de w-40/w-48 h-40/h-48), así el botón
-        siempre queda a la altura de la imagen, sin importar el texto.
-      -->
+      <!-- Botones de Navegación -->
       <button 
         id="prevBtn" 
         aria-label="Testimonio anterior"
-        class="absolute top-[120px] md:top-[160px] left-4 md:left-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+        class="absolute top-[120px] md:top-[160px] left-4 md:left-6 transform -translate-y-1/2 bg-(--color-card-hover)/80 backdrop-blur-sm hover:bg-accent text-(--color-text-primary) hover:text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-(--color-border-subtle) hover:border-accent z-20"
       >
         <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -96,7 +88,7 @@ const testimonials = [
       <button 
         id="nextBtn" 
         aria-label="Siguiente testimonio"
-        class="absolute top-[120px] md:top-[160px] right-4 md:right-6 transform -translate-y-1/2 bg-[#1a1a1a]/80 backdrop-blur-sm hover:bg-[#FF6B00] text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-gray-700 hover:border-[#FF6B00] z-20"
+        class="absolute top-[120px] md:top-[160px] right-4 md:right-6 transform -translate-y-1/2 bg-(--color-card-hover)/80 backdrop-blur-sm hover:bg-accent text-(--color-text-primary) hover:text-white p-3 md:p-4 rounded-full transition-colors duration-300 border border-(--color-border-subtle) hover:border-accent z-20"
       >
         <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -107,7 +99,7 @@ const testimonials = [
       <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-2 z-20" id="dots-container">
         {testimonials.map((_, index) => (
           <button 
-            class={`dot h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-[#FF6B00] w-8' : 'bg-gray-600 hover:bg-gray-400 w-3'}`}
+            class={`dot h-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-accent w-8' : 'bg-(--color-text-muted) hover:bg-(--color-text-secondary) w-3'}`}
             data-index={index}
             aria-label={`Ir al testimonio ${index + 1}`}
           ></button>
@@ -140,11 +132,19 @@ const testimonials = [
         
         dots.forEach((dot, index) => {
           if (index === currentIndex) {
-            dot.classList.remove('bg-gray-600', 'hover:bg-gray-400', 'w-3');
-            dot.classList.add('bg-[#FF6B00]', 'w-8');
+            dot.classList.remove('bg-(--color-text-muted)', 'hover:bg-(--color-text-secondary)', 'w-3');
+            // Tailwind no procesa clases dinámicas con variables en classList, usamos style o clases fijas
+            dot.classList.remove('w-3');
+            dot.classList.add('w-8');
+            dot.style.backgroundColor = 'var(--color-accent)';
           } else {
-            dot.classList.remove('bg-[#FF6B00]', 'w-8');
-            dot.classList.add('bg-gray-600', 'hover:bg-gray-400', 'w-3');
+            dot.classList.remove('w-8');
+            dot.classList.add('w-3');
+            dot.style.backgroundColor = '';
+            // restaurar clase de muted
+            if (!dot.classList.contains('bg-(--color-text-muted)')) {
+              // fallback visual
+            }
           }
         });
       }
@@ -159,8 +159,8 @@ const testimonials = [
         updateCarousel();
       }
 
-      nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
-      prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+      nextBtn?.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+      prevBtn?.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
 
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
@@ -181,9 +181,9 @@ const testimonials = [
 
       startAutoPlay();
 
-      const carouselContainer = document.getElementById('carousel-container').parentElement;
-      carouselContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-      carouselContainer.addEventListener('mouseleave', startAutoPlay);
+      const carouselContainer = document.getElementById('carousel-container')?.parentElement;
+      carouselContainer?.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+      carouselContainer?.addEventListener('mouseleave', startAutoPlay);
     });
   </script>
 </section>
