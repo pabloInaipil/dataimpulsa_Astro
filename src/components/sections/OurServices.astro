@@ -1,5 +1,5 @@
 ---
-// src/components/sections/Services.astro
+// src/components/sections/OurServices.astro
 import { Icon } from "astro-icon/components";
 
 const services = [
@@ -23,34 +23,36 @@ const services = [
   },
 ];
 
-const metrics = [
+const clients = [
   {
-    value: "98/100",
-    label: "PageSpeed Insights",
-    sub: "Puntuación promedio en dispositivos móviles",
-    icon: "lucide:gauge",
+    name: "Todocasa",
+    href: "https://todocasaconstrucciones.cl",
+    logo: "/logos/todocasa.webp",
   },
   {
-    value: "0.6s",
-    label: "Tiempo de carga promedio",
-    sub: "Sitios ligeros y optimizados",
-    icon: "lucide:clock",
+    name: "Autoval",
+    href: "https://autoval2.cl",
+    logo: "/logos/autoval.webp",
   },
   {
-    value: "99.9%",
-    label: "Disponibilidad",
-    sub: "Infraestructura confiable y segura.",
-    icon: "lucide:shield-check",
+    name: "Qué Pasa Araucanía",
+    href: "https://quepasaaraucania.cl",
+    logo: "/logos/qpa.png",
   },
   {
-    value: "+35%",
-    label: "Crecimiento promedio",
-    sub: "Resultados reales para nuestros clientes.",
-    icon: "lucide:trending-up",
+    name: "Minera Milenium",
+    href: "https://mineramilenium.cl",
+    logo: "/logos/mineramilenium.png",
+  },
+  {
+    name: "Rhino SpA",
+    href: "https://rhino-spa.cl",
+    logo: "/logos/rhino.png",
   },
 ];
 
-const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
+// Duplicamos para el loop infinito del carrusel
+const track = [...clients, ...clients];
 ---
 
 <section id="servicios" class="relative z-[1] py-20 px-4 sm:px-6 bg-(--color-deep)">
@@ -93,83 +95,114 @@ const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
       ))}
     </div>
 
-   <!-- Barra de métricas -->
-<div class="bg-(--color-surface) border border-(--color-border-subtle) rounded-2xl p-6 md:p-8 mb-10 reveal reveal-delay-2" data-metrics>
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
-    
-    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0s">
-      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
-        <Icon name="lucide:gauge" class="w-4 h-4" />
-      </div>
-      <div>
-        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
-          <span data-count="98" data-suffix="/100">98/100</span>
-        </p>
-        <p class="text-sm font-medium text-(--color-text-primary)">PageSpeed Insights</p>
-        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Puntuación promedio en dispositivos móviles</p>
+    <!-- Barra de métricas -->
+    <div
+      class="bg-(--color-surface) border border-(--color-border-subtle) rounded-2xl p-6 md:p-8 mb-10 reveal reveal-delay-2"
+      data-metrics
+    >
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
+
+        <div class="flex items-start gap-3 metric-float" style="--float-delay: 0s">
+          <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+            <Icon name="lucide:gauge" class="w-4 h-4" />
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+              <span data-count="98" data-suffix="/100">98/100</span>
+            </p>
+            <p class="text-sm font-medium text-(--color-text-primary)">PageSpeed Insights</p>
+            <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Puntuación promedio en dispositivos móviles</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 metric-float" style="--float-delay: 0.3s">
+          <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+            <Icon name="lucide:clock" class="w-4 h-4" />
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+              <span data-count="0.6" data-dec="1" data-suffix="s">0.6s</span>
+            </p>
+            <p class="text-sm font-medium text-(--color-text-primary)">Tiempo de carga promedio</p>
+            <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Sitios ligeros y optimizados</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 metric-float" style="--float-delay: 0.6s">
+          <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+            <Icon name="lucide:shield-check" class="w-4 h-4" />
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+              <span data-count="99.9" data-dec="1" data-suffix="%">99.9%</span>
+            </p>
+            <p class="text-sm font-medium text-(--color-text-primary)">Disponibilidad</p>
+            <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Infraestructura confiable y segura.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 metric-float" style="--float-delay: 0.9s">
+          <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
+            <Icon name="lucide:trending-up" class="w-4 h-4" />
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
+              <span data-count="35" data-prefix="+" data-suffix="%">+35%</span>
+            </p>
+            <p class="text-sm font-medium text-(--color-text-primary)">Crecimiento promedio</p>
+            <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Resultados reales para nuestros clientes.</p>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.3s">
-      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
-        <Icon name="lucide:clock" class="w-4 h-4" />
-      </div>
-      <div>
-        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
-          <span data-count="0.6" data-dec="1" data-suffix="s">0.6s</span>
-        </p>
-        <p class="text-sm font-medium text-(--color-text-primary)">Tiempo de carga promedio</p>
-        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Sitios ligeros y optimizados</p>
-      </div>
-    </div>
-
-    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.6s">
-      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
-        <Icon name="lucide:shield-check" class="w-4 h-4" />
-      </div>
-      <div>
-        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
-          <span data-count="99.9" data-dec="1" data-suffix="%">99.9%</span>
-        </p>
-        <p class="text-sm font-medium text-(--color-text-primary)">Disponibilidad</p>
-        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Infraestructura confiable y segura.</p>
-      </div>
-    </div>
-
-    <div class="flex items-start gap-3 metric-float" style="animation-delay: 0.9s">
-      <div class="w-9 h-9 rounded-lg bg-(--color-card) border border-(--color-border-subtle) flex items-center justify-center shrink-0 text-accent">
-        <Icon name="lucide:trending-up" class="w-4 h-4" />
-      </div>
-      <div>
-        <p class="text-2xl md:text-3xl font-bold text-(--color-text-primary) font-display leading-none mb-1">
-          <span data-count="35" data-prefix="+" data-suffix="%">+35%</span>
-        </p>
-        <p class="text-sm font-medium text-(--color-text-primary)">Crecimiento promedio</p>
-        <p class="text-xs text-(--color-text-muted) mt-0.5 leading-snug">Resultados reales para nuestros clientes.</p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-    <!-- Logos de confianza -->
-    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 reveal reveal-delay-3">
-      <span class="text-xs text-(--color-text-muted)">
+    <!-- Logos de confianza — carrusel infinito -->
+    <div class="mt-4 reveal reveal-delay-3">
+      <p class="text-center text-xs text-(--color-text-muted) mb-6">
         Confían en nosotros empresas que quieren crecer sin límites
-      </span>
-      {logos.map((logo) => (
-        <span class="text-sm font-semibold text-(--color-text-muted) tracking-wide uppercase">
-          {logo}
-        </span>
-      ))}
+      </p>
+
+      <div class="logo-marquee relative overflow-hidden">
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-24 z-10 bg-gradient-to-r from-(--color-deep) to-transparent"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-24 z-10 bg-gradient-to-l from-(--color-deep) to-transparent"></div>
+
+        <div class="logo-track flex items-center gap-10 md:gap-16 w-max">
+          {track.map((c) => (
+            <a
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="logo-item flex items-center justify-center shrink-0 no-underline opacity-60 hover:opacity-100 transition-opacity duration-300"
+              aria-label={c.name}
+            >
+              {c.logo ? (
+                <img
+                  src={c.logo}
+                  alt={c.name}
+                  class="h-8 md:h-10 w-auto object-contain logo-img"
+                  loading="lazy"
+                />
+              ) : (
+                <span class="text-sm md:text-base font-semibold tracking-wide uppercase text-(--color-text-muted) whitespace-nowrap">
+                  {c.name}
+                </span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
 
   </div>
 </section>
 
 <style>
+  /* Flotación de métricas */
   .metric-float {
     animation: float-metric 3.5s ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+    will-change: transform;
   }
 
   @keyframes float-metric {
@@ -177,19 +210,63 @@ const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
     50% { transform: translateY(-6px); }
   }
 
+  /* Carrusel de logos */
+  .logo-marquee {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .logo-track {
+    animation: logo-scroll 28s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes logo-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Logos: grayscale + adaptado a dark/light */
+  .logo-img {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+
+  .logo-item:hover .logo-img {
+    filter: grayscale(0%);
+  }
+
+  :global(html:not(.light)) .logo-img {
+    filter: grayscale(100%) brightness(1.4);
+  }
+
+  :global(html:not(.light)) .logo-item:hover .logo-img {
+    filter: grayscale(0%) brightness(1.1);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .metric-float {
       animation: none !important;
+    }
+    .logo-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      gap: 1.5rem;
     }
   }
 </style>
 
 <script>
-  const section = document.querySelector("[data-metrics]");
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function initMetrics() {
+    const section = document.querySelector("[data-metrics]");
+    if (!section) return;
 
-  if (section && !reduced) {
-    const targets = [...section.querySelectorAll<HTMLElement>("[data-count]")].map((el) => ({
+    const targets = [...section.querySelectorAll("[data-count]")].map((el) => ({
       el,
       to: parseFloat(el.dataset.count ?? "0"),
       dec: parseInt(el.dataset.dec ?? "0", 10),
@@ -197,36 +274,50 @@ const logos = ["FALABELLA", "copec", "bci", "andesite", "chile"];
       suffix: el.dataset.suffix ?? "",
     }));
 
-    // Empezar en 0
     for (const t of targets) {
       t.el.textContent = t.prefix + (0).toFixed(t.dec) + t.suffix;
     }
 
     const DURATION = 1600;
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    let started = false;
+
+    const run = () => {
+      if (started) return;
+      started = true;
+      let start;
+      const tick = (now) => {
+        if (start === undefined) start = now;
+        const p = easeOut(Math.min((now - start) / DURATION, 1));
+        for (const t of targets) {
+          t.el.textContent = t.prefix + (t.to * p).toFixed(t.dec) + t.suffix;
+        }
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
 
     const io = new IntersectionObserver(
       (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
-        io.disconnect();
-
-        let start: number | undefined;
-        const tick = (now: number) => {
-          if (start === undefined) start = now;
-          const p = easeOut(Math.min((now - start) / DURATION, 1));
-
-          for (const t of targets) {
-            const val = (t.to * p).toFixed(t.dec);
-            t.el.textContent = t.prefix + val + t.suffix;
-          }
-
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
+        if (entries.some((e) => e.isIntersecting)) {
+          run();
+          io.disconnect();
+        }
       },
-      { threshold: 0.3 }
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
     );
 
     io.observe(section);
+
+    requestAnimationFrame(() => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) run();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMetrics);
+  } else {
+    initMetrics();
   }
 </script>
