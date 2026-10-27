@@ -71,13 +71,12 @@ const { webm, mp4, opacity = 0.35 } = Astro.props;
   type NetworkInfo = { saveData?: boolean; effectiveType?: string };
 
   function shouldSkipVideo(): boolean {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const smallViewport = window.matchMedia('(max-width: 767px)').matches;
-    const connection = (navigator as Navigator & { connection?: NetworkInfo }).connection;
-    const constrained =
-      connection?.saveData === true || /(^|-)2g$/.test(connection?.effectiveType ?? '');
-    return reducedMotion || smallViewport || constrained;
-  }
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const connection = (navigator as Navigator & { connection?: NetworkInfo }).connection;
+  const constrained =
+    connection?.saveData === true || /(^|-)2g$/.test(connection?.effectiveType ?? '');
+  return reducedMotion || constrained;
+}
 
   function mountVideo(video: HTMLVideoElement): void {
     const { webm, mp4 } = video.dataset;
