@@ -1,0 +1,141 @@
+---
+// src/components/HeroBackgroundVideo.astro
+interface Props {
+  /** Optional. If omitted, only the mp4 source is used. */
+  webm?: string;
+  mp4: string;
+  /** Final opacity of the video layer (0–1). Keep it low so text stays readable. */
+  opacity?: number;
+}
+
+const { webm, mp4, opacity = 0.35 } = Astro.props;
+---
+
+<div class="hero-video" aria-hidden="true" style={`--hero-video-opacity: ${opacity}`}>
+  <video
+    class="hero-video__media"
+    muted
+    loop
+    playsinline
+    preload="none"
+    disablepictureinpicture
+    data-webm={webm}
+    data-mp4={mp4}
+  ></video>
+  <div class="hero-video__overlay"></div>
+</div>
+
+<style>
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+ .hero-video__media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%; /* antes era center (50%) */
+  opacity: 0;
+  filter: saturate(0.75);
+  transition: opacity 1.2s ease;
+}
+
+  .hero-video__media.is-playing {
+    opacity: var(--hero-video-opacity);
+  }
+
+  /* Keeps WCAG contrast on the left (copy) side; lighter on the right (dashboard card) */
+  .hero-video__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+    rgb(8 18 40 / 0.85) 0%,
+    rgb(8 18 40 / 0.55) 45%,
+    rgb(8 18 40 / 0.25) 100%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video__media {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  type NetworkInfo = { saveData?: boolean; effectiveType?: string };
+
+  function shouldSkipVideo(): boolean {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const smallViewport = window.matchMedia('(max-width: 767px)').matches;
+    const connection = (navigator as Navigator & { connection?: NetworkInfo }).connection;
+    const constrained =
+      connection?.saveData === true || /(^|-)2g$/.test(connection?.effectiveType ?? '');
+    return reducedMotion || smallViewport || constrained;
+  }
+
+  function mountVideo(video: HTMLVideoElement): void {
+    const { webm, mp4 } = video.dataset;
+    if (!mp4) return;
+
+    const addSource = (src: string, type: string) => {
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = type;
+      video.append(source);
+    };
+
+    if (webm) addSource(webm, 'video/webm');
+    addSource(mp4, 'video/mp4');
+
+    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+    video.load();
+    video.play().catch(() => {
+      /* Autoplay blocked: the static gradient remains, which is an acceptable fallback */
+    });
+
+    // Pause when the hero is off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+  }
+
+  function initHeroVideo(): void {
+    const video = document.querySelector<HTMLVideoElement>('.hero-video__media');
+    if (!video || video.dataset.mounted === 'true') return;
+    if (shouldSkipVideo()) return;
+
+    video.dataset.mounted = 'true';
+
+    const schedule = () => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => mountVideo(video), { timeout: 3000 });
+      } else {
+        setTimeout(() => mountVideo(video), 1500);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      schedule();
+    } else {
+      window.addEventListener('load', schedule, { once: true });
+    }
+  }
+
+  initHeroVideo();
+  // Re-run after client-side navigation if <ClientRouter /> is enabled
+  document.addEventListener('astro:page-load', initHeroVideo);
+</script>

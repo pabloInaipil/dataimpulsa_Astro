@@ -2,12 +2,16 @@
 // src/components/sections/Hero.astro
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "@/config/site";
+import HeroBackgroundVideo from "@components/HeroBackgroundVideo.astro";
 ---
 
-<section class="relative pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 overflow-hidden bg-(--color-deep)">
+<section class="relative isolate pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 overflow-hidden bg-(--color-deep)">
   <!-- Fondo con gradiente azul -->
   <div class="absolute inset-0 bg-gradient-to-br from-[#0A1628] via-[#0B1D36] to-[#0F2744] pointer-events-none"></div>
   
+  <!-- Video de fondo (solo desktop; en móvil/reduced-motion queda el gradiente) -->
+  <HeroBackgroundVideo mp4="/videos/hero-bg.mp4" opacity={0.9} />
+
   <!-- Patrón de puntos sutil -->
   <div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle, rgba(59,130,246,0.15) 1px, transparent 1px); background-size: 28px 28px;"></div>
 
